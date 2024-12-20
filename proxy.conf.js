@@ -25,6 +25,16 @@ const PROXY_CONFIG = {
     logLevel: 'debug',
     bypass: bypassFn,
   },
+  '/mfe/onecx-ai-ui': {
+    target: 'http://localhost:4200/',
+    secure: false,
+    pathRewrite: {
+      '^.*/mfe/onecx-ai-ui': '',
+    },
+    changeOrigin: true,
+    logLevel: 'debug',
+    bypass: bypassFn,
+  }
 };
 
 module.exports = PROXY_CONFIG;
