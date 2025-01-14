@@ -1,1 +1,43 @@
-{}
+{
+  "A_IKNOWLEDGE_DOCUMENT_SEARCH": {
+    "HEADER": "AIKnowledgeDocument Search",
+    "SUB_HEADER": "Searching and displaying of AIKnowledgeDocument",
+    "HELP_ARTICLE_ID": "Help Article",
+    "EMPTY_RESULTS": "No results.",
+    "BREADCRUMB": "Search",
+    "DIAGRAM": {
+      "SUM": "Total"
+    },
+    "HEADER_ACTIONS": {
+      "EXPORT_ALL": "Export all",
+      "SHOW_CHART": "Show chart",
+      "HIDE_CHART": "Hide chart",
+      "CREATE_SEARCH_CONFIG": "Create search configuration",
+      "UPDATE_SEARCH_CONFIG": "Update search configuration",
+      "DIALOG_CONFIRM": "Confirm",
+      "DIALOG_CANCEL": "Cancel"
+    },
+    "ERROR_MESSAGES": {
+      "SEARCH_RESULTS_LOADING_FAILED": "Loading search results failed.",
+      "SEARCH_CONFIG_CREATION_FAILED": "Create search configuration failed.",
+      "SEARCH_CONFIG_UPDATE_FAILED": "Update search configuration failed.",
+      "SEARCH_CONFIGS_LOADING_FAILED": "Loading search configurations failed."
+    },
+    "INPUT_FIELDS": {
+      "NAME": "Name"
+    },
+    "CRITERIA": {
+      "ID": "id",
+      "NAME": "Name"
+    },
+    "COLUMNS": {
+      "ID": "id",
+      "TITLE": "Name"
+    },
+    "PREDEFINED_GROUP": {
+      "DEFAULT": "Default",
+      "EXTENDED": "Extended",
+      "FULL": "Full"
+    }
+  }
+}

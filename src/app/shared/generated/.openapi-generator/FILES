@@ -1,12 +1,15 @@
 .gitignore
-.openapi-generator-ignore
 README.md
 api.module.ts
+api/aIKnowledgeDocumentBffService.service.ts
 api/api.ts
 configuration.ts
 encoder.ts
 git_push.sh
 index.ts
+model/aIKnowledgeDocument.ts
+model/aIKnowledgeDocumentSearchRequest.ts
+model/aIKnowledgeDocumentSearchResponse.ts
 model/models.ts
 param.ts
 variables.ts
