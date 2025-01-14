@@ -1,34 +1,38 @@
 app:
   name: ui
   image:
-    repository: 'onecx/onecx-ai-ui'
+    repository: onecx/onecx-ai-ui
   routing:
     enabled: true
     path: /mfe/onecxAiUi/
-
   operator:
-    # Microfrontend
     microfrontend:
       enabled: true
       specs:
         main:
-          exposedModule: './OnecxAiUiModule'
-          description: 'OneCX OnecxAiUi Module'
-          note: 'OneCX OnecxAiUi UI module auto import via MF operator'
+          exposedModule: ./OnecxAiUiModule
+          description: OneCX OnecxAiUi Module
+          note: OneCX OnecxAiUi UI module auto import via MF operator
           type: MODULE
           technology: WEBCOMPONENTMODULE
           remoteName: onecx-ai-ui
           tagName: onecx-ai-ui-webcomponent
-    # Permission
     permission:
       enabled: true
       spec:
         permissions:
-    # Keycloak
+          A_IKNOWLEDGE_DOCUMENT:
+            CREATE: Create aIKnowledgeDocument
+            EDIT: Edit aIKnowledgeDocument
+            DELETE: Delete aIKnowledgeDocument
+            SAVE: Update and save aIKnowledgeDocument
+            IMPORT: Import aIKnowledgeDocument
+            EXPORT: Export aIKnowledgeDocument
+            VIEW: View mode for aIKnowledgeDocument
+            SEARCH: Search aIKnowledgeDocument
     keycloak:
       client:
         enabled: true
         spec:
           kcConfig:
-            clientId: 'onecx-ai-ui'
-# PIPE Config
+            clientId: onecx-ai-ui

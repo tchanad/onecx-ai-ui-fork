@@ -11,9 +11,11 @@ import { CalendarModule } from 'primeng/calendar'
 import { SharedModule } from '../shared/shared.module'
 import { aIKnowledgeDocumentFeature } from './aiknowledge-document.reducers'
 import { routes } from './aiknowledge-document.routes'
+import { AIKnowledgeDocumentSearchEffects } from './pages/aiknowledge-document-search/aiknowledge-document-search.effects'
+import { AIKnowledgeDocumentSearchComponent } from './pages/aiknowledge-document-search/aiknowledge-document-search.component'
 
 @NgModule({
-  declarations: [],
+  declarations: [AIKnowledgeDocumentSearchComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
@@ -25,8 +27,8 @@ import { routes } from './aiknowledge-document.routes'
     ReactiveFormsModule,
     CalendarModule,
     StoreModule.forFeature(aIKnowledgeDocumentFeature),
-    EffectsModule.forFeature(),
+    EffectsModule.forFeature([AIKnowledgeDocumentSearchEffects]),
     TranslateModule
   ]
 })
-export class AIKnowledgeDocumentModule {}
+export class AIKnowledgeDocumentModule { }
