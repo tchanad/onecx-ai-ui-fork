@@ -15,8 +15,8 @@ export const selectResults = createSelector(
   (results): RowListGridData[] => {
     return results.map((item) => ({
       imagePath: '',
-      id: item.id,
-      name: item.name
+      id: item.id ? `A_IKNOWLEDGE_DOCUMENT_SEARCH.COLUMNS.ID.${item.id}` : '',
+      name: item.name ? `A_IKNOWLEDGE_DOCUMENT_SEARCH.COLUMNS.NAME.${item.name}` : '',
       // ...item
       // ACTION S7: Here you can create a mapping of the items and their corresponding translation strings
     }))
