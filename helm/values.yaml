@@ -21,7 +21,7 @@ app:
       enabled: true
       spec:
         permissions:
-          A_IKNOWLEDGE_DOCUMENT:
+          AI_KNOWLEDGE_DOCUMENT:
             CREATE: Create aIKnowledgeDocument
             EDIT: Edit aIKnowledgeDocument
             DELETE: Delete aIKnowledgeDocument

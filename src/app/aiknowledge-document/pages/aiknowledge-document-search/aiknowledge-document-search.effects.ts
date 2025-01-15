@@ -12,6 +12,7 @@ import {
 import { ExportDataService, PortalMessageService } from '@onecx/portal-integration-angular'
 import equal from 'fast-deep-equal'
 import { catchError, map, of, switchMap, tap } from 'rxjs'
+import { selectUrl } from 'src/app/shared/selectors/router.selectors'
 import { AIKnowledgeDocumentBffService } from '../../../shared/generated'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
 import { AIKnowledgeDocumentSearchComponent } from './aiknowledge-document-search.component'
@@ -59,6 +60,22 @@ export class AIKnowledgeDocumentSearchEffects {
               onSameUrlNavigation: 'ignore'
             })
           }
+        })
+      )
+    },
+    { dispatch: false }
+  )
+
+  detailsButtonClicked$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(AIKnowledgeDocumentSearchActions.detailsButtonClicked),
+        concatLatestFrom(() => this.store.select(selectUrl)),
+        tap(([action, currentUrl]) => {
+          let urlTree = this.router.parseUrl(currentUrl)
+          urlTree.queryParams = {}
+          urlTree.fragment = null
+          this.router.navigate([urlTree.toString(), 'details', action.id])
         })
       )
     },
@@ -132,7 +149,7 @@ export class AIKnowledgeDocumentSearchEffects {
   exportData$ = createEffect(
     () => {
       return this.actions$.pipe(
-        ofType(AIKnowledgeDocumentSearchActions.chartVisibilityToggled),
+        ofType(AIKnowledgeDocumentSearchActions.exportButtonClicked),
         concatLatestFrom(() => this.store.select(selectAIKnowledgeDocumentSearchViewModel)),
         map(([, viewModel]) => {
           this.exportDataService.exportCsv(viewModel.displayedColumns, viewModel.results, 'AIKnowledgeDocument.csv')
@@ -145,7 +162,7 @@ export class AIKnowledgeDocumentSearchEffects {
   errorMessages: { action: Action; key: string }[] = [
     {
       action: AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsLoadingFailed,
-      key: 'A_IKNOWLEDGE_DOCUMENT_SEARCH.ERROR_MESSAGES.SEARCH_RESULTS_LOADING_FAILED'
+      key: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.ERROR_MESSAGES.SEARCH_RESULTS_LOADING_FAILED'
     }
   ]
 

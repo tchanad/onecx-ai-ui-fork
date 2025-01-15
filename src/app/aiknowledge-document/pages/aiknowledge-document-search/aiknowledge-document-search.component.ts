@@ -2,7 +2,13 @@ import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { isValidDate } from '@onecx/accelerator'
-import { Action, BreadcrumbService, DataTableColumn, ExportDataService } from '@onecx/portal-integration-angular'
+import {
+  Action,
+  BreadcrumbService,
+  DataTableColumn,
+  ExportDataService,
+  RowListGridData
+} from '@onecx/portal-integration-angular'
 import { PrimeIcons } from 'primeng/api'
 import { map, Observable } from 'rxjs'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
@@ -28,20 +34,20 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     map((vm) => {
       const actions: Action[] = [
         {
-          labelKey: 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
+          labelKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
           icon: PrimeIcons.DOWNLOAD,
-          titleKey: 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
+          titleKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
           show: 'asOverflow',
           actionCallback: () => this.exportItems()
         },
         {
           labelKey: vm.chartVisible
-            ? 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.HIDE_CHART'
-            : 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.SHOW_CHART',
+            ? 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.HIDE_CHART'
+            : 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.SHOW_CHART',
           icon: PrimeIcons.EYE,
           titleKey: vm.chartVisible
-            ? 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.HIDE_CHART'
-            : 'A_IKNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.SHOW_CHART',
+            ? 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.HIDE_CHART'
+            : 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.SHOW_CHART',
           show: 'asOverflow',
           actionCallback: () => this.toggleChartVisibility()
         }
@@ -51,7 +57,7 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
   )
 
   // ACTION S9: Please select the column to be displayed in the diagram
-  diagramColumnId = 'id'
+  diagramColumnId = 'documentRefId'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)
   )
@@ -69,13 +75,13 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     @Inject(LOCALE_ID) public readonly locale: string,
     private readonly exportDataService: ExportDataService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.breadcrumbService.setItems([
       {
-        titleKey: 'A_IKNOWLEDGE_DOCUMENT_SEARCH.BREADCRUMB',
-        labelKey: 'A_IKNOWLEDGE_DOCUMENT_SEARCH.BREADCRUMB',
+        titleKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.BREADCRUMB',
+        labelKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.BREADCRUMB',
         routerLink: '/aiknowledge-document'
       }
     ])
@@ -88,20 +94,24 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
         ...acc,
         [key]: isValidDate(value)
           ? new Date(
-              Date.UTC(
-                value.getFullYear(),
-                value.getMonth(),
-                value.getDate(),
-                value.getHours(),
-                value.getMinutes(),
-                value.getSeconds()
-              )
+            Date.UTC(
+              value.getFullYear(),
+              value.getMonth(),
+              value.getDate(),
+              value.getHours(),
+              value.getMinutes(),
+              value.getSeconds()
             )
+          )
           : value || undefined
       }),
       {}
     )
     this.store.dispatch(AIKnowledgeDocumentSearchActions.searchButtonClicked({ searchCriteria }))
+  }
+
+  details({ id }: RowListGridData) {
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.detailsButtonClicked({ id }))
   }
 
   resetSearch() {

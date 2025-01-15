@@ -9,9 +9,17 @@
  */
 
 
-export interface AIKnowledgeDocument {
+export interface AIKnowledgeDocument { 
     modificationCount?: number;
-    id: number;
+    id: string;
     name: string;
+    status?: AIKnowledgeDocumentStatusEnum;
 }
+export enum AIKnowledgeDocumentStatusEnum {
+    New = 'NEW',
+    Processing = 'PROCESSING',
+    Embedded = 'EMBEDDED'
+};
+
+
 
