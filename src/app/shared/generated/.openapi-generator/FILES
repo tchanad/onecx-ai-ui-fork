@@ -10,6 +10,10 @@ index.ts
 model/aIKnowledgeDocument.ts
 model/aIKnowledgeDocumentSearchRequest.ts
 model/aIKnowledgeDocumentSearchResponse.ts
+model/getAIKnowledgeDocumentByIdResponse.ts
 model/models.ts
+model/problemDetailInvalidParam.ts
+model/problemDetailParam.ts
+model/problemDetailResponse.ts
 param.ts
 variables.ts

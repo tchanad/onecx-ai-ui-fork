@@ -1,5 +1,18 @@
 {
-  "A_IKNOWLEDGE_DOCUMENT_SEARCH": {
+  "AI_KNOWLEDGE_DOCUMENT_DETAILS": {
+    "HELP_ARTICLE_ID": "Hilfeartikel",
+    "BREADCRUMB": "Details",
+    "HEADER": "AIKnowledgeDocument Details",
+    "SUB_HEADER": "Anzeigen von AIKnowledgeDocument Details",
+    "ERROR_MESSAGES": {
+      "DETAILS_LOADING_FAILED": "Details konnten nicht geladen werden."
+    },
+    "GENERAL": {
+      "BACK": "Zurück",
+      "MORE": "Mehr"
+    }
+  },
+  "AI_KNOWLEDGE_DOCUMENT_SEARCH": {
     "HEADER": "AIKnowledgeDocument Suche",
     "SUB_HEADER": "Suchen und Anzeigen von AIKnowledgeDocument",
     "HELP_ARTICLE_ID": "Hilfeartikel",
@@ -27,12 +40,13 @@
       "NAME": "Name"
     },
     "CRITERIA": {
-      "ID": "id",
+      "ID": "DokumentRefId",
       "NAME": "Name"
     },
     "COLUMNS": {
-      "ID": "id",
-      "TITLE": "Name"
+      "ID": "DokumentRefId",
+      "NAME": "Name",
+      "STATUS": "Status"
     },
     "PREDEFINED_GROUP": {
       "DEFAULT": "Standard",

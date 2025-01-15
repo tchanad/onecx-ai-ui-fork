@@ -1,5 +1,18 @@
 {
-  "A_IKNOWLEDGE_DOCUMENT_SEARCH": {
+  "AI_KNOWLEDGE_DOCUMENT_DETAILS": {
+    "HELP_ARTICLE_ID": "Help Article",
+    "BREADCRUMB": "Details",
+    "HEADER": "AIKnowledgeDocument Details",
+    "SUB_HEADER": "Display of AIKnowledgeDocument Details",
+    "ERROR_MESSAGES": {
+      "DETAILS_LOADING_FAILED": "Loading details failed."
+    },
+    "GENERAL": {
+      "BACK": "Back",
+      "MORE": "More"
+    }
+  },
+  "AI_KNOWLEDGE_DOCUMENT_SEARCH": {
     "HEADER": "AIKnowledgeDocument Search",
     "SUB_HEADER": "Searching and displaying of AIKnowledgeDocument",
     "HELP_ARTICLE_ID": "Help Article",
@@ -27,12 +40,13 @@
       "NAME": "Name"
     },
     "CRITERIA": {
-      "ID": "id",
+      "ID": "DocumentRefId",
       "NAME": "Name"
     },
     "COLUMNS": {
-      "ID": "id",
-      "TITLE": "Name"
+      "ID": "DocumentRefId",
+      "NAME": "Name",
+      "STATUS": "Status"
     },
     "PREDEFINED_GROUP": {
       "DEFAULT": "Default",

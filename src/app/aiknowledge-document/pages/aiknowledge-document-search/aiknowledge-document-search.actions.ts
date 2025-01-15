@@ -6,6 +6,10 @@ import { AIKnowledgeDocumentSearchCriteria } from './aiknowledge-document-search
 export const AIKnowledgeDocumentSearchActions = createActionGroup({
   source: 'AIKnowledgeDocumentSearch',
   events: {
+    'Details button clicked': props<{
+      id: number | string
+    }>(),
+
     'Search button clicked': props<{
       searchCriteria: AIKnowledgeDocumentSearchCriteria
     }>(),
