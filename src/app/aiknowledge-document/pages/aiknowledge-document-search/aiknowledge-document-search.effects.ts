@@ -130,7 +130,7 @@ export class AIKnowledgeDocumentSearchEffects {
         }
         const itemToEditId = dialogResult.result.id
         const itemToEdit = {
-          dataObject: dialogResult.result
+          aiKnowledgeDocumentData: dialogResult.result
         } as UpdateAIKnowledgeDocument
         return this.aIKnowledgeDocumentService.updateAIKnowledgeDocument(itemToEditId, itemToEdit).pipe(
           map(() => {
@@ -183,7 +183,7 @@ export class AIKnowledgeDocumentSearchEffects {
           throw new Error('DialogResult was not set as expected!')
         }
         const toCreateItem = {
-          dataObject: dialogResult.result
+          aiKnowledgeDocumentData: dialogResult.result
         } as CreateAIKnowledgeDocument
         return this.aIKnowledgeDocumentService.createAIKnowledgeDocument(toCreateItem).pipe(
           map(() => {

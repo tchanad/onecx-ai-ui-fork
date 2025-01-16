@@ -3,7 +3,7 @@ import { DialogButtonClicked, DialogPrimaryButtonDisabled, DialogResult } from '
 
 import { FormControl, FormGroup, Validators } from '@angular/forms'
 import { map } from 'rxjs'
-import { AIKnowledgeDocument } from 'src/app/shared/generated'
+import { AIKnowledgeDocument, AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 
 import { AIKnowledgeDocumentCreateUpdateViewModel } from './aiknowledge-document-create-update.viewmodel'
 
@@ -26,10 +26,12 @@ export class AIKnowledgeDocumentCreateUpdateComponent
 
   primaryButtonEnabled: EventEmitter<boolean> = new EventEmitter()
   dialogResult: AIKnowledgeDocument | undefined = undefined
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
 
   constructor() {
     this.formGroup = new FormGroup({
-      name: new FormControl(null, [Validators.maxLength(255)])
+      name: new FormControl(null, [Validators.maxLength(255), Validators.required]),
+      status: new FormControl('', [Validators.required]),
       // ACTION C3: Add form fields
     })
     this.formGroup.statusChanges
