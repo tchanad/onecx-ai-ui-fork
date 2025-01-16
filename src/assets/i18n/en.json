@@ -1,4 +1,33 @@
 {
+  "AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE": {
+    "ACTION": {
+      "CREATE": "Create"
+    },
+    "CREATE": {
+      "HEADER": "Create AIKnowledgeDocument",
+      "SUCCESS": "Creation succesful",
+      "ERROR": "Creation failed",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      }
+    },
+    "UPDATE": {
+      "SUCCESS": "Update successful",
+      "FAILED": "ACTION: Add Translation",
+      "ERROR": "Update failed",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      },
+      "HEADER": "Update AIKnowledgeDocument"
+    },
+    "FORM": {
+      "ID": "DocumentRefId",
+      "NAME": "Name",
+      "STATUS": "Status"
+    }
+  },
   "AI_KNOWLEDGE_DOCUMENT_DETAILS": {
     "HELP_ARTICLE_ID": "Help Article",
     "BREADCRUMB": "Details",

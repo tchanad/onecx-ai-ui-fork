@@ -17,13 +17,21 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { AIKnowledgeDocumentCreateResponse } from '../model/aIKnowledgeDocumentCreateResponse';
+// @ts-ignore
 import { AIKnowledgeDocumentSearchRequest } from '../model/aIKnowledgeDocumentSearchRequest';
 // @ts-ignore
 import { AIKnowledgeDocumentSearchResponse } from '../model/aIKnowledgeDocumentSearchResponse';
 // @ts-ignore
+import { AIKnowledgeDocumentUpdateResponse } from '../model/aIKnowledgeDocumentUpdateResponse';
+// @ts-ignore
+import { CreateAIKnowledgeDocument } from '../model/createAIKnowledgeDocument';
+// @ts-ignore
 import { GetAIKnowledgeDocumentByIdResponse } from '../model/getAIKnowledgeDocumentByIdResponse';
 // @ts-ignore
 import { ProblemDetailResponse } from '../model/problemDetailResponse';
+// @ts-ignore
+import { UpdateAIKnowledgeDocument } from '../model/updateAIKnowledgeDocument';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -94,6 +102,74 @@ export class AIKnowledgeDocumentBffService {
             throw Error("key may not be null if value is not object or array");
         }
         return httpParams;
+    }
+
+    /**
+     * This operation performs a create.
+     * @param createAIKnowledgeDocument 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<AIKnowledgeDocumentCreateResponse>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<AIKnowledgeDocumentCreateResponse>>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<AIKnowledgeDocumentCreateResponse>>;
+    public createAIKnowledgeDocument(createAIKnowledgeDocument: CreateAIKnowledgeDocument, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (createAIKnowledgeDocument === null || createAIKnowledgeDocument === undefined) {
+            throw new Error('Required parameter createAIKnowledgeDocument was null or undefined when calling createAIKnowledgeDocument.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/aIKnowledgeDocument`;
+        return this.httpClient.request<AIKnowledgeDocumentCreateResponse>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: createAIKnowledgeDocument,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
     }
 
     /**
@@ -209,6 +285,78 @@ export class AIKnowledgeDocumentBffService {
             {
                 context: localVarHttpContext,
                 body: aIKnowledgeDocumentSearchRequest,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * This operation performs an update.
+     * @param id 
+     * @param updateAIKnowledgeDocument 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public updateAIKnowledgeDocument(id: string, updateAIKnowledgeDocument: UpdateAIKnowledgeDocument, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<AIKnowledgeDocumentUpdateResponse>;
+    public updateAIKnowledgeDocument(id: string, updateAIKnowledgeDocument: UpdateAIKnowledgeDocument, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<AIKnowledgeDocumentUpdateResponse>>;
+    public updateAIKnowledgeDocument(id: string, updateAIKnowledgeDocument: UpdateAIKnowledgeDocument, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<AIKnowledgeDocumentUpdateResponse>>;
+    public updateAIKnowledgeDocument(id: string, updateAIKnowledgeDocument: UpdateAIKnowledgeDocument, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateAIKnowledgeDocument.');
+        }
+        if (updateAIKnowledgeDocument === null || updateAIKnowledgeDocument === undefined) {
+            throw new Error('Required parameter updateAIKnowledgeDocument was null or undefined when calling updateAIKnowledgeDocument.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/aIKnowledgeDocument/${this.configuration.encodeParam({name: "id", value: id, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}`;
+        return this.httpClient.request<AIKnowledgeDocumentUpdateResponse>('put', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: updateAIKnowledgeDocument,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -62,6 +62,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetailResponse'
+    put:
+      operationId: updateAIKnowledgeDocument
+      tags:
+        - AIKnowledgeDocumentBffService
+      description: This operation performs an update.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAIKnowledgeDocument'
+      responses:
+        '204':
+          description: AIKnowledgeDocument updated
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeDocumentUpdateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+        '404':
+          description: AIKnowledgeDocument not found
+  /aIKnowledgeDocument:
+    post:
+      operationId: createAIKnowledgeDocument
+      tags:
+        - AIKnowledgeDocumentBffService
+      description: This operation performs a create.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAIKnowledgeDocument'
+      responses:
+        '201':
+          description: New AIKnowledgeDocument created
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeDocumentCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
 components:
   schemas:
     AIKnowledgeDocument:
@@ -80,9 +149,9 @@ components:
         status:
           type: string
           enum:
-           - NEW
-           - PROCESSING
-           - EMBEDDED
+            - NEW
+            - PROCESSING
+            - EMBEDDED
     AIKnowledgeDocumentSearchRequest:
       type: object
       properties:
@@ -90,15 +159,14 @@ components:
           type: integer
           maximum: 2500
         id:
-          type: integer
-          format: int32
+          type: string
         name:
           type: string
         status:
           enum:
-           - NEW
-           - PROCESSING
-           - EMBEDDED
+            - NEW
+            - PROCESSING
+            - EMBEDDED
     AIKnowledgeDocumentSearchResponse:
       type: object
       required:
@@ -149,3 +217,57 @@ components:
       properties:
         result:
           $ref: '#/components/schemas/AIKnowledgeDocument'
+    CreateAIKnowledgeDocument:
+      type: object
+      required:
+        - name
+        - status
+      properties:
+        aiKnowledgeDocumentData:
+          type: object
+          $ref: AIKnowledgeDocument
+        # "ACTION C1: add additional properties here"
+    UpdateAIKnowledgeDocument:
+      type: object
+      required:
+        - name
+        - status
+      properties:
+        aiKnowledgeDocumentData:
+          type: object
+          $ref: AIKnowledgeDocument
+        # " ACTION C1: add additional properties here"
+    AIKnowledgeDocumentCreateResponse:
+      type: object
+      required:
+        - name
+        - status
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED
+        # "ACTION C1: add additional properties here"
+    AIKnowledgeDocumentUpdateResponse:
+      type: object
+      required:
+        - name
+        - status
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED
+        # " ACTION C1: add additional properties here"

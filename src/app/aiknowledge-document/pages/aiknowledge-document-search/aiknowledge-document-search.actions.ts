@@ -6,6 +6,21 @@ import { AIKnowledgeDocumentSearchCriteria } from './aiknowledge-document-search
 export const AIKnowledgeDocumentSearchActions = createActionGroup({
   source: 'AIKnowledgeDocumentSearch',
   events: {
+    'Create aiknowledge document button clicked': emptyProps(),
+    'Edit aiknowledge document button clicked': props<{
+      id: number | string
+    }>(),
+    'Create aiknowledge document cancelled': emptyProps(),
+    'Update aiknowledge document cancelled': emptyProps(),
+    'Create aiknowledge document succeeded': emptyProps(),
+    'Update aiknowledge document succeeded': emptyProps(),
+    'Create aiknowledge document failed': props<{
+      error: string | null
+    }>(),
+    'Update aiknowledge document failed': props<{
+      error: string | null
+    }>(),
+
     'Details button clicked': props<{
       id: number | string
     }>(),
