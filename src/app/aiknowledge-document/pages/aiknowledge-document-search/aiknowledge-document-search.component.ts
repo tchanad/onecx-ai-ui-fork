@@ -34,6 +34,12 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     map((vm) => {
       const actions: Action[] = [
         {
+          labelKey: 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.ACTION.CREATE',
+          icon: PrimeIcons.PLUS,
+          show: 'always',
+          actionCallback: () => this.create()
+        },
+        {
           labelKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
           icon: PrimeIcons.DOWNLOAD,
           titleKey: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.HEADER_ACTIONS.EXPORT_ALL',
@@ -57,7 +63,7 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
   )
 
   // ACTION S9: Please select the column to be displayed in the diagram
-  diagramColumnId = 'documentRefId'
+  diagramColumnId = 'id'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)
   )
@@ -112,6 +118,18 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
 
   details({ id }: RowListGridData) {
     this.store.dispatch(AIKnowledgeDocumentSearchActions.detailsButtonClicked({ id }))
+  }
+
+  create() {
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentButtonClicked())
+  }
+
+  edit({ id }: RowListGridData) {
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked({ id }))
+  }
+
+  delete({ id }: RowListGridData) {
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentButtonClicked({ id }))
   }
 
   resetSearch() {

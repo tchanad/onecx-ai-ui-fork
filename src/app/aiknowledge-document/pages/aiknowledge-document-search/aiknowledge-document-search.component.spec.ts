@@ -11,6 +11,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing'
 import { TranslateService } from '@ngx-translate/core'
 import { BreadcrumbService, ColumnType, PortalCoreModule, UserService } from '@onecx/portal-integration-angular'
 import { TranslateTestingModule } from 'ngx-translate-testing'
+import { PrimeIcons } from 'primeng/api'
 import { DialogService } from 'primeng/dynamicdialog'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
 import { aIKnowledgeDocumentSearchColumns } from './aiknowledge-document-search.columns'
@@ -38,8 +39,8 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => { },
-        stopPropagation: () => { }
+        stopImmediatePropagation: () => {},
+        stopPropagation: () => {}
       })
     )
   }
@@ -65,7 +66,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     columns: aIKnowledgeDocumentSearchColumns,
     searchCriteria: {
       id: undefined,
-      name: undefined,
+      name: undefined
     },
     results: [],
     displayedColumns: [],
@@ -259,19 +260,77 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
 
   it('should dispatch searchButtonClicked action on search', (done) => {
     const formValue = formBuilder.group({
-      changeMe: '123'
+      name: undefined
     })
     component.aIKnowledgeDocumentSearchFormGroup = formValue
 
     store.scannedActions$.pipe(ofType(AIKnowledgeDocumentSearchActions.searchButtonClicked)).subscribe((a) => {
-      expect(a.searchCriteria).toEqual({ changeMe: '123' })
+      expect(a.searchCriteria).toEqual({ name: undefined })
       done()
     })
 
     component.search(formValue)
   })
 
-  it('should dispatch export csv data on export action click', async () => {
+  it('should dispatch editAIKnowledgeDocumentButtonClicked action on item edit click', async () => {
+    jest.spyOn(store, 'dispatch')
+
+    store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {
+      ...baseAIKnowledgeDocumentSearchViewModel,
+      results: [
+        {
+          id: '1',
+          imagePath: '',
+          column_1: 'val_1'
+        }
+      ],
+      columns: [
+        {
+          columnType: ColumnType.STRING,
+          nameKey: 'COLUMN_KEY',
+          id: 'column_1'
+        }
+      ]
+    })
+    store.refreshState()
+
+    const interactiveDataView = await aIKnowledgeDocumentSearch.getSearchResults()
+    const dataView = await interactiveDataView.getDataView()
+    const dataTable = await dataView.getDataTable()
+    const rowActionButtons = await dataTable?.getActionButtons()
+
+    expect(rowActionButtons?.length).toBeGreaterThan(0)
+    let editButton
+    for (const actionButton of rowActionButtons ?? []) {
+      const icon = await actionButton.getAttribute('ng-reflect-icon')
+      expect(icon).toBeTruthy()
+      if (icon == 'pi pi-pencil') {
+        editButton = actionButton
+      }
+    }
+    expect(editButton).toBeTruthy()
+    editButton?.click()
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked({ id: '1' })
+    )
+  })
+
+  it('should dispatch createAIKnowledgeDocumentButtonClicked action on create click', async () => {
+    jest.spyOn(store, 'dispatch')
+
+    const header = await aIKnowledgeDocumentSearch.getHeader()
+    const createButton = await (await header.getPageHeader()).getInlineActionButtonByIcon(PrimeIcons.PLUS)
+
+    expect(createButton).toBeTruthy()
+    await createButton?.click()
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentButtonClicked()
+    )
+  })
+
+  it('should export csv data on export action click', async () => {
     jest.spyOn(store, 'dispatch')
 
     const results = [

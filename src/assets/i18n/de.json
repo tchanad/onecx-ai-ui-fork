@@ -1,4 +1,41 @@
 {
+  "AI_KNOWLEDGE_DOCUMENT_DELETE": {
+    "HEADER": "AIKnowledgeDocument löschen",
+    "MESSAGE": "Bitte bestätigen, dass diese AIKnowledgeDocument gelöscht werden soll.",
+    "CONFIRM": "Bestätigen",
+    "CANCEL": "Abbrechen",
+    "SUCCESS": "AIKnowledgeDocument erfolgreich gelöscht",
+    "ERROR": "Konnte AIKnowledgeDocument nicht löschen"
+  },
+  "AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE": {
+    "ACTION": {
+      "CREATE": "Erstellen"
+    },
+    "CREATE": {
+      "HEADER": "Neues AIKnowledgeDocument erstellen",
+      "SUCCESS": "Erstellung erfolgreich",
+      "ERROR": "Erstellung fehlgeschlagen",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      }
+    },
+    "UPDATE": {
+      "SUCCESS": "Aktualisierung erfolgreich",
+      "FAILED": "ACTION: Add Translation",
+      "ERROR": "Aktualisierung fehlgeschlagen",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      },
+      "HEADER": "AIKnowledgeDocument bearbeiten"
+    },
+    "FORM": {
+      "ID": "DokumentRefId",
+      "NAME": "Name",
+      "STATUS": "Status"
+    }
+  },
   "AI_KNOWLEDGE_DOCUMENT_DETAILS": {
     "HELP_ARTICLE_ID": "Hilfeartikel",
     "BREADCRUMB": "Details",
@@ -10,6 +47,10 @@
     "GENERAL": {
       "BACK": "Zurück",
       "MORE": "Mehr"
+    },
+    "UPDATE": {
+      "NAME": "Name",
+      "STATUS": "Status"
     }
   },
   "AI_KNOWLEDGE_DOCUMENT_SEARCH": {

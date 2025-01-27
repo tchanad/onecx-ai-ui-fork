@@ -8,12 +8,16 @@ encoder.ts
 git_push.sh
 index.ts
 model/aIKnowledgeDocument.ts
+model/aIKnowledgeDocumentCreateResponse.ts
 model/aIKnowledgeDocumentSearchRequest.ts
 model/aIKnowledgeDocumentSearchResponse.ts
+model/aIKnowledgeDocumentUpdateResponse.ts
+model/createAIKnowledgeDocument.ts
 model/getAIKnowledgeDocumentByIdResponse.ts
 model/models.ts
 model/problemDetailInvalidParam.ts
 model/problemDetailParam.ts
 model/problemDetailResponse.ts
+model/updateAIKnowledgeDocument.ts
 param.ts
 variables.ts

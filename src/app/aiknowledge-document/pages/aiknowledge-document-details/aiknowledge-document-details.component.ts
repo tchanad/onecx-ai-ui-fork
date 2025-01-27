@@ -9,6 +9,7 @@ import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-deta
 import { ActivatedRoute } from '@angular/router'
 import { AIKnowledgeDocumentDetailsActions } from './aiknowledge-document-details.actions'
 import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-aiknowledge-document-details',
@@ -66,11 +67,20 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
     })
   )
 
+  public formGroup: FormGroup;
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
+
   constructor(
     private store: Store,
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute
-  ) { }
+  ) {
+    this.formGroup = new FormGroup({
+      name: new FormControl(null, [Validators.maxLength(255), Validators.required]),
+      status: new FormControl('', [Validators.required]),
+      // ACTION C3: Add form fields
+    })
+  }
 
   ngOnInit(): void {
     this.breadcrumbService.setItems([
