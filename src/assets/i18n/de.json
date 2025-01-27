@@ -1,4 +1,12 @@
 {
+  "AI_KNOWLEDGE_DOCUMENT_DELETE": {
+    "HEADER": "AIKnowledgeDocument löschen",
+    "MESSAGE": "Bitte bestätigen, dass diese AIKnowledgeDocument gelöscht werden soll.",
+    "CONFIRM": "Bestätigen",
+    "CANCEL": "Abbrechen",
+    "SUCCESS": "AIKnowledgeDocument erfolgreich gelöscht",
+    "ERROR": "Konnte AIKnowledgeDocument nicht löschen"
+  },
   "AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE": {
     "ACTION": {
       "CREATE": "Erstellen"
@@ -39,6 +47,10 @@
     "GENERAL": {
       "BACK": "Zurück",
       "MORE": "Mehr"
+    },
+    "UPDATE": {
+      "NAME": "Name",
+      "STATUS": "Status"
     }
   },
   "AI_KNOWLEDGE_DOCUMENT_SEARCH": {

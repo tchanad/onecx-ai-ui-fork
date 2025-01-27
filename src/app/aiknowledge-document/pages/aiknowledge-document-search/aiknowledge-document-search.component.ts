@@ -128,6 +128,10 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     this.store.dispatch(AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked({ id }))
   }
 
+  delete({ id }: RowListGridData) {
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentButtonClicked({ id }))
+  }
+
   resetSearch() {
     this.store.dispatch(AIKnowledgeDocumentSearchActions.resetButtonClicked())
   }

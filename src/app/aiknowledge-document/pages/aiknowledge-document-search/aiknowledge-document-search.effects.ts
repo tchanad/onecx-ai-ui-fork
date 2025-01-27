@@ -9,8 +9,14 @@ import {
   filterOutOnlyQueryParamsChanged,
   filterOutQueryParamsHaveNotChanged
 } from '@onecx/ngrx-accelerator'
-import { ExportDataService, PortalDialogService, PortalMessageService } from '@onecx/portal-integration-angular'
+import {
+  DialogState,
+  ExportDataService,
+  PortalDialogService,
+  PortalMessageService
+} from '@onecx/portal-integration-angular'
 import equal from 'fast-deep-equal'
+import { PrimeIcons } from 'primeng/api'
 import { catchError, map, mergeMap, of, switchMap, tap } from 'rxjs'
 import { AIKnowledgeDocument, CreateAIKnowledgeDocument, UpdateAIKnowledgeDocument } from 'src/app/shared/generated'
 import { selectUrl } from 'src/app/shared/selectors/router.selectors'
@@ -201,6 +207,83 @@ export class AIKnowledgeDocumentSearchEffects {
         return of(
           AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentFailed({
             error
+          })
+        )
+      })
+    )
+  })
+
+  refreshSearchAfterDelete$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentSucceeded),
+      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectCriteria)),
+      switchMap(([, searchCriteria]) => this.performSearch(searchCriteria))
+    )
+  })
+
+  deleteButtonClicked$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentButtonClicked),
+      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectResults)),
+      map(([action, results]) => {
+        console.log('Action:', action);
+        console.log('Results:', results);
+        return results.find((item) => item.id == action.id)
+      }),
+      mergeMap((itemToDelete) => {
+        console.log('Item to delete:', itemToDelete);
+        return this.portalDialogService
+          .openDialog<unknown>(
+            'AI_KNOWLEDGE_DOCUMENT_DELETE.HEADER',
+            'AI_KNOWLEDGE_DOCUMENT_DELETE.MESSAGE',
+            {
+              key: 'AI_KNOWLEDGE_DOCUMENT_DELETE.CONFIRM',
+              icon: PrimeIcons.CHECK
+            },
+            {
+              key: 'AI_KNOWLEDGE_DOCUMENT_DELETE.CANCEL',
+              icon: PrimeIcons.TIMES
+            }
+          )
+          .pipe(
+            map((state): [DialogState<unknown>, AIKnowledgeDocument | undefined] => {
+              console.log('Dialog STATE:', state);
+              console.log('Item to delete after dialog:', itemToDelete);
+              return [state, itemToDelete]
+            })
+          )
+      }),
+      switchMap(([dialogResult, itemToDelete]) => {
+        console.log('Dialog result:', dialogResult);
+        console.log('Item to delete after dialog:', itemToDelete);
+        if (!dialogResult || dialogResult.button == 'secondary') {
+          console.log('Dialog result:', dialogResult);
+          console.log('Item to delete after dialog:', itemToDelete);
+          return of(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentCancelled())
+        }
+        if (!itemToDelete) {
+          throw new Error('Item to delete not found!')
+        }
+
+        return this.aIKnowledgeDocumentService.deleteAIKnowledgeDocument(itemToDelete.id).pipe(
+          map(() => {
+            console.log('Dialog result SUCCESS:', dialogResult);
+            console.log('Item to delete after dialog:', itemToDelete);
+            this.messageService.success({
+              summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.SUCCESS'
+            })
+            return AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentSucceeded()
+          }),
+          catchError((error) => {
+            console.log('Error:', error);
+            this.messageService.error({
+              summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.ERROR'
+            })
+            return of(
+              AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentFailed({
+                error
+              })
+            )
           })
         )
       })

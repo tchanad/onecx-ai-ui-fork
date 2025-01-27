@@ -100,6 +100,20 @@ paths:
                 $ref: '#/components/schemas/ProblemDetailResponse'
         '404':
           description: AIKnowledgeDocument not found
+    delete:
+      tags:
+        - AIKnowledgeDocumentBffService
+      operationId: deleteAIKnowledgeDocument
+      description: Delete AIKnowledgeDocument by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: AIKnowledgeDocument deleted
   /aIKnowledgeDocument:
     post:
       operationId: createAIKnowledgeDocument
@@ -220,23 +234,19 @@ components:
     CreateAIKnowledgeDocument:
       type: object
       required:
-        - name
-        - status
+        - aiKnowledgeDocumentData
       properties:
         aiKnowledgeDocumentData:
           type: object
-          $ref: AIKnowledgeDocument
-        # "ACTION C1: add additional properties here"
+          $ref: '#/components/schemas/AIKnowledgeDocument'
     UpdateAIKnowledgeDocument:
       type: object
       required:
-        - name
-        - status
+        - aiKnowledgeDocumentData
       properties:
         aiKnowledgeDocumentData:
           type: object
-          $ref: AIKnowledgeDocument
-        # " ACTION C1: add additional properties here"
+          $ref: '#/components/schemas/AIKnowledgeDocument'
     AIKnowledgeDocumentCreateResponse:
       type: object
       required:
@@ -253,7 +263,6 @@ components:
             - NEW
             - PROCESSING
             - EMBEDDED
-        # "ACTION C1: add additional properties here"
     AIKnowledgeDocumentUpdateResponse:
       type: object
       required:
@@ -270,4 +279,3 @@ components:
             - NEW
             - PROCESSING
             - EMBEDDED
-        # " ACTION C1: add additional properties here"

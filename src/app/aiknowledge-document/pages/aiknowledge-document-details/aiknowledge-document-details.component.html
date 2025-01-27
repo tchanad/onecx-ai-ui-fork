@@ -4,4 +4,32 @@
     [subheader]="'AI_KNOWLEDGE_DOCUMENT_DETAILS.SUB_HEADER' | translate" [objectDetails]="(headerLabels$ | async) ?? []"
     [actions]="(headerActions$ | async) ?? []" [disableDefaultActions]="true" [manualBreadcrumbs]="true">
   </ocx-page-header>
+  <ocx-content>
+    <form [formGroup]="formGroup">
+      <div class="flex flex-wrap flex-column gap-4 mt-2">
+        <div class="grid mt-0 p-fluid justify-content-between">
+          <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <input id="id" pInputText type="text" formControlName="id" class="p-inputtext p-component" />
+              <label for="id">{{
+                'AI_KNOWLEDGE_DOCUMENT_DETAILS.UPDATE.NAME' | translate
+                }}</label>
+            </span>
+          </div>
+
+          <div class="col-12 md:col-3">
+            <span class="p-float-label">
+              <select id="status" class="w-full pt-3 pb-2" formControlName="status">
+                <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
+              </select>
+              <!-- <input id="status" pInputText type="text" formControlName="status" class="p-inputtext p-component" /> -->
+              <label for="status">{{
+                'AI_KNOWLEDGE_DOCUMENT_DETAILS.UPDATE.STATUS' | translate
+                }}</label>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </ocx-content>
 </ocx-portal-page>

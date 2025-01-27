@@ -18,9 +18,9 @@
   </ocx-search-header>
   <ocx-content-container layout="horizontal">
     <ocx-content class="w-full">
-      <ocx-interactive-data-view (editItem)="edit($event)" editPermission="AI_KNOWLEDGE_DOCUMENT#EDIT"
-        (viewItem)="details($event)" [data]="vm.results" [columns]="vm.columns" [listGridPaginator]="false"
-        [emptyResultsMessage]="
+      <ocx-interactive-data-view (deleteItem)="delete($event)" deletePermission="AI_KNOWLEDGE_DOCUMENT#DELETE"
+        (editItem)="edit($event)" editPermission="AI_KNOWLEDGE_DOCUMENT#EDIT" (viewItem)="details($event)"
+        [data]="vm.results" [columns]="vm.columns" [listGridPaginator]="false" [emptyResultsMessage]="
           'AI_KNOWLEDGE_DOCUMENT_SEARCH.EMPTY_RESULTS' | translate
         " [supportedViewLayouts]="['table']" (displayedColumnsChange)="onDisplayedColumnsChange($event)"
         viewPermission="AI_KNOWLEDGE_DOCUMENT#VIEW">
