@@ -15,6 +15,11 @@ import { AIKnowledgeDocumentDetailsHarness } from './aiknowledge-document-detail
 import { initialState } from './aiknowledge-document-details.reducers'
 import { selectAIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.selectors'
 import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.viewmodel'
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { DialogService } from 'primeng/dynamicdialog'
+// import { AIKnowledgeDocumentModule } from '../../aiknowledge-document.module'; // addd import manually
+// import { StoreModule } from '@ngrx/store';
+// import { EffectsModule } from '@ngrx/effects';
 
 describe('AIKnowledgeDocumentDetailsComponent', () => {
   const origAddEventListener = window.addEventListener
@@ -23,6 +28,7 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
   let listeners: any[] = []
   window.addEventListener = (_type: any, listener: any) => {
     listeners.push(listener)
+    // console.log("=========== NEW ADD_EVENT_LISTENERS: ", listener)
   }
 
   window.removeEventListener = (_type: any, listener: any) => {
@@ -31,11 +37,13 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
 
   window.postMessage = (m: any) => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
+    // console.log("=========== POST_EVENT_LISTENERS: ", listeners)
+    // console.log("=========== M IN POST_EVENT_LISTENERS: ", m)
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
@@ -50,8 +58,10 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
   let store: MockStore<Store>
   let breadcrumbService: BreadcrumbService
   let aIKnowledgeDocumentDetails: AIKnowledgeDocumentDetailsHarness
+  let formBuilder: FormBuilder
 
   const mockActivatedRoute = {
+    params: of({ id: '1' }),
     snapshot: {
       data: {}
     }
@@ -70,14 +80,21 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
           'de',
           require('./../../../../assets/i18n/de.json')
         ),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+        FormsModule
+        // AIKnowledgeDocumentModule,
+        // StoreModule.forRoot({}),
+        // EffectsModule.forRoot([])
       ],
       providers: [
         provideMockStore({
           initialState: { aIKnowledgeDocument: { details: initialState } }
         }),
         BreadcrumbService,
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        DialogService,
+        FormBuilder
       ]
     }).compileComponents()
 
@@ -85,10 +102,14 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
     userService.hasPermission = () => true
     const translateService = TestBed.inject(TranslateService)
     translateService.use('en')
+    formBuilder = TestBed.inject(FormBuilder)
 
     store = TestBed.inject(MockStore)
+    console.log("BEFORE: ------------------ STORE: ", store); // is null
     store.overrideSelector(selectAIKnowledgeDocumentDetailsViewModel, baseAIKnowledgeDocumentDetaulsViewModel)
+    console.log("BEFORE REFRESH: ------------------ STORE: ", store); // is null
     store.refreshState()
+    console.log("AFTER REFRESH: ------------------ STORE: ", store); // is null
 
     fixture = TestBed.createComponent(AIKnowledgeDocumentDetailsComponent)
     component = fixture.componentInstance

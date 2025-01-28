@@ -39,8 +39,8 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
@@ -534,6 +534,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     store.refreshState()
 
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
+    console.log("======================= DIAGRAM :", diagram)
     expect(diagram).toBeNull()
 
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {
@@ -557,6 +558,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     store.refreshState()
 
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
+    console.log("END ======================= DIAGRAM :", diagram)
     expect(diagram).toBeTruthy()
   })
 })
