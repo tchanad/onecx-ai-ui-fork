@@ -10,22 +10,30 @@
         <div class="grid mt-0 p-fluid justify-content-between">
           <div class="col-12 md:col-3">
             <span class="p-float-label">
-              <input id="name" pInputText type="text" formControlName="name" class="p-inputtext p-component" />
+              <input id="name" pInputText type="text" formControlName="name" class="p-inputtext p-component"
+                [placeholder]="(viewModel$ | async)?.details?.name || 'AI_KNOWLEDGE_DOCUMENT_DETAILS.UPDATE.NAME' | translate" />
               <label for="name">{{
                 'AI_KNOWLEDGE_DOCUMENT_DETAILS.UPDATE.NAME' | translate
                 }}</label>
             </span>
           </div>
-
+          <div class="col-12 md:col-3">
+            <span class="flex justify-content-center">
+              <label for="id">{{ vm.details?.id }}</label>
+            </span>
+          </div>
           <div class="col-12 md:col-3">
             <span class="p-float-label">
               <select id="status" class="w-full pt-3 pb-2" formControlName="status">
-                <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
+                <option *ngFor="let status of statusValues" [value]="status"
+                  [selected]="status === (viewModel$ | async)?.details?.status">
+                  {{ status }}
+                </option>
               </select>
               <!-- <input id="status" pInputText type="text" formControlName="status" class="p-inputtext p-component" /> -->
-              <label for="status">{{
+              <!-- <label for="status">{{
                 'AI_KNOWLEDGE_DOCUMENT_DETAILS.UPDATE.STATUS' | translate
-                }}</label>
+                }}</label> -->
             </span>
           </div>
         </div>

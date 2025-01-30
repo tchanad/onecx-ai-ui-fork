@@ -66,7 +66,8 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     columns: aIKnowledgeDocumentSearchColumns,
     searchCriteria: {
       id: undefined,
-      name: undefined
+      name: undefined,
+      status: undefined
     },
     results: [],
     displayedColumns: [],
@@ -558,7 +559,6 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     store.refreshState()
 
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
-    console.log("END ======================= DIAGRAM :", diagram)
     expect(diagram).toBeTruthy()
   })
 })

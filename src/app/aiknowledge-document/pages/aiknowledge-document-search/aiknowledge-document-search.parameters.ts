@@ -4,6 +4,7 @@ import { z, ZodTypeAny } from 'zod'
 export const aIKnowledgeDocumentSearchCriteriasSchema = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
+  status: z.string().transform((value) => value as AIKnowledgeDocumentStatusEnum).optional()
   // ACTION S2: Please define the members for your aIKnowledgeDocumentSearchCriteriasSchema here
 } satisfies Partial<Record<keyof AIKnowledgeDocumentSearchRequest, ZodTypeAny>>)
 
