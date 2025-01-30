@@ -36,4 +36,3 @@ export const aIKnowledgeDocumentSearchColumns: DataTableColumn[] = [{
         'AI_KNOWLEDGE_DOCUMENT_SEARCH.PREDEFINED_GROUP.FULL',
     ],
 }]
-// ACTION S6: Define search results columns

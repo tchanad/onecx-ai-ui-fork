@@ -26,17 +26,13 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
       const labels: ObjectDetailItem[] = [
         {
           label: 'Name',
-          // value: vm.details?.name || '',
         },
         {
           label: 'DocumentRefId',
-          // value: vm.details?.id || '',
         },
         {
           label: 'Status',
-          // value: vm.details?.status || '',
         },
-        //ACTION D1: Add header values here
       ]
       return labels
     })
@@ -58,9 +54,7 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
           icon: PrimeIcons.ELLIPSIS_V,
           show: 'always',
           btnClass: '',
-          actionCallback: () => {
-            // TODO: add callback
-          }
+          actionCallback: () => { }
         }
       ]
       return actions
@@ -78,7 +72,6 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
     this.formGroup = new FormGroup({
       name: new FormControl(null, [Validators.maxLength(255), Validators.required]),
       status: new FormControl('', [Validators.required]),
-      // ACTION C3: Add form fields
     })
   }
 

@@ -388,10 +388,6 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
       AIKnowledgeDocumentSearchHarness
     )
 
-    // expect(store.dispatch).toHaveBeenCalledWith(
-    //   AIKnowledgeDocumentSearchActions.displayedColumnsChanged({ displayedColumns: [] })
-    // )
-
     jest.clearAllMocks()
 
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {
@@ -535,7 +531,6 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     store.refreshState()
 
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
-    console.log("======================= DIAGRAM :", diagram)
     expect(diagram).toBeNull()
 
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {

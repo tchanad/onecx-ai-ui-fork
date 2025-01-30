@@ -29,7 +29,6 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     selectAIKnowledgeDocumentSearchViewModel
   )
 
-  // ACTION S10: Update header actions
   headerActions$: Observable<Action[]> = this.viewModel$.pipe(
     map((vm) => {
       const actions: Action[] = [
@@ -62,7 +61,6 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     })
   )
 
-  // ACTION S9: Please select the column to be displayed in the diagram
   diagramColumnId = 'id'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)

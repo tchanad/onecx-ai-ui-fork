@@ -1,7 +1,7 @@
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { LetDirective } from '@ngrx/component'
 import { Store } from '@ngrx/store'
 import { MockStore, provideMockStore } from '@ngrx/store/testing'
@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core'
 import { BreadcrumbService, PortalCoreModule, UserService } from '@onecx/portal-integration-angular'
 import { TranslateTestingModule } from 'ngx-translate-testing'
 import { PrimeIcons } from 'primeng/api'
-import { Observable, of } from 'rxjs'
+import { of } from 'rxjs'
 import { AIKnowledgeDocumentDetailsComponent } from './aiknowledge-document-details.component'
 import { AIKnowledgeDocumentDetailsHarness } from './aiknowledge-document-details.harness'
 import { initialState } from './aiknowledge-document-details.reducers'
@@ -17,13 +17,8 @@ import { selectAIKnowledgeDocumentDetailsViewModel } from './aiknowledge-documen
 import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.viewmodel'
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { DialogService } from 'primeng/dynamicdialog'
-import { AIKnowledgeDocumentBffService, AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
+import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 
-import { AIKnowledgeDocumentDetailsEffects } from './aiknowledge-document-details.effects';
-import { PortalMessageService } from '@onecx/portal-integration-angular'
-import { hot, cold } from 'jasmine-marbles'
-import { EffectsModule } from '@ngrx/effects'
-import { AIKnowledgeDocumentDetailsActions } from './aiknowledge-document-details.actions'
 
 describe('AIKnowledgeDocumentDetailsComponent', () => {
   const origAddEventListener = window.addEventListener
@@ -210,7 +205,6 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
   })
 
   it('should patch form value from details page', () => {
-    // component.ngOnInit()
     fixture.detectChanges()
 
     const formGroup = component.formGroup;
@@ -222,62 +216,3 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
     )
   })
 })
-
-// Test for Effects
-// describe('AIKnowledgeDocumentDetailsEffects', () => {
-//   let effects: AIKnowledgeDocumentDetailsEffects;
-//   let store: MockStore<Store>;
-//   let aiKnowledgeDocumentService: AIKnowledgeDocumentBffService;
-//   let messageService: PortalMessageService;
-//   let action$: Observable<any>;
-//   const mockActivatedRoute = {
-//     params: of({ id: '1' }),
-//     snapshot: {
-//       data: {}
-//     }
-//   }
-//   // Effects tests
-//   beforeEach(() => {
-//     TestBed.configureTestingModule({
-//       declarations: [AIKnowledgeDocumentDetailsComponent],
-//       imports: [
-//         EffectsModule.forRoot([AIKnowledgeDocumentDetailsEffects]),
-//         TranslateTestingModule.withTranslations('en', require('./../../../../assets/i18n/en.json')).withTranslations(
-//           'de',
-//           require('./../../../../assets/i18n/de.json')
-//         ),
-//         PortalCoreModule,
-//         LetDirective,
-//         HttpClientTestingModule
-//       ],
-//       providers: [
-//         AIKnowledgeDocumentDetailsEffects,
-//         provideMockStore({ initialState: { aIKnowledgeDocument: initialState } }),
-//         AIKnowledgeDocumentBffService,
-//         PortalMessageService,
-//         { provide: ActivatedRoute, useValue: mockActivatedRoute }
-//       ]
-//     });
-//     store = TestBed.inject(MockStore);
-//     effects = TestBed.inject(AIKnowledgeDocumentDetailsEffects);
-//     aiKnowledgeDocumentService = TestBed.inject(AIKnowledgeDocumentBffService);
-//     messageService = TestBed.inject(PortalMessageService);
-
-//   })
-
-//   it('should dispatch aiKnowledgeDocumentDetailsReceived on successful load', async () => {
-//     // Arrange
-//     const details = { id: '1', name: 'Test AIKownledgeDocument 1', status: AIKnowledgeDocumentStatusEnum.Processing };
-//     const action = AIKnowledgeDocumentDetailsActions.loadAiknowledgeDocumentDetails({ id: '1' });
-//     const result = AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsReceived({ details });
-//     console.log('----------- RESULT: ', result)
-//     console.log('----------- ACTION: ', action)
-//     // Act
-//     action$ = hot('-a-', { a: action });
-//     const response = cold('-a|', { a: { result: details } });
-//     const expected = cold('--b', { b: result });
-
-//     // Assert
-//     expect(effects.loadAIKnowledgeDocumentDetails$).toBeObservable(expected);
-//   })
-// })

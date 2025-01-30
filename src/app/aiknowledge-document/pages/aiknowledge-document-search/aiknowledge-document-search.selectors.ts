@@ -18,8 +18,6 @@ export const selectResults = createSelector(
       id: item.id ? `${item.id}` : '',
       name: item.name ? `${item.name}` : '',
       status: item.status ? `${item.status}` : '',
-      // ...item
-      // ACTION S7: Here you can create a mapping of the items and their corresponding translation strings
     }))
   }
 )

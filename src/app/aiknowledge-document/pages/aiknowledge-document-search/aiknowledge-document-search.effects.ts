@@ -59,8 +59,6 @@ export class AIKnowledgeDocumentSearchEffects {
           if (!results.success || !equal(criteria, results.data)) {
             const params = {
               ...criteria
-              //TODO: Move to docs to explain how to only put the date part in the URL in case you have date and not datetime
-              //exampleDate: criteria.exampleDate?.toISOString()?.slice(0, 10)
             }
             this.router.navigate([], {
               relativeTo: this.route,
