@@ -41,13 +41,13 @@ export class AIKnowledgeDocumentDetailsEffects {
       switchMap(({ id }) =>
         this.aIKnowledgeDocumentService.getAIKnowledgeDocumentById(id ?? '').pipe(
           map(({ result }) =>
-            AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsReceived({
+            AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsReceived({
               details: result
             })
           ),
           catchError((error) =>
             of(
-              AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsLoadingFailed({
+              AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed({
                 error
               })
             )
@@ -59,20 +59,20 @@ export class AIKnowledgeDocumentDetailsEffects {
 
   loadAIKnowledgeDocumentDetails$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(AIKnowledgeDocumentDetailsActions.loadAiknowledgeDocumentDetails),
+      ofType(AIKnowledgeDocumentDetailsActions.loadAIKnowledgeDocumentDetails),
       tap(() => console.log('Loading AIKnowledgeDocument details...')),
       mergeMap((action) =>
         this.aIKnowledgeDocumentService.getAIKnowledgeDocumentById(action.id).pipe(
           map((response) => {
             console.log('AIKnowledgeDocument details loaded:', response.result);
-            return AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsReceived({
+            return AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsReceived({
               details: response.result,
             });
           }),
           catchError((error) => {
             console.log('Error loading AIKnowledgeDocument details:', error);
             return of(
-              AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsLoadingFailed({
+              AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed({
                 error: error.message,
               })
             );
@@ -84,7 +84,7 @@ export class AIKnowledgeDocumentDetailsEffects {
 
   errorMessages: { action: Action; key: string }[] = [
     {
-      action: AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsLoadingFailed,
+      action: AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed,
       key: 'AI_KNOWLEDGE_DOCUMENT_DETAILS.ERROR_MESSAGES.DETAILS_LOADING_FAILED'
     }
   ]

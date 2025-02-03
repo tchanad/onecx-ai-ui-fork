@@ -9,7 +9,7 @@ paths:
       tags:
         - AIKnowledgeDocumentBffService
       description: This operation performs a search based on provided search criteria.
-        Search for aIKnowledgeDocument results.
+        Search for AIKnowledgeDocument results.
       requestBody:
         content:
           application/json:
@@ -30,7 +30,7 @@ paths:
     get:
       x-onecx:
         permissions:
-          aIKnowledgeDocument:
+          AIKnowledgeDocument:
             - read
       operationId: getAIKnowledgeDocumentById
       tags:
@@ -160,6 +160,8 @@ components:
           type: string
         name:
           type: string
+        documentRefId:
+          type: string
         status:
           type: string
           enum:
@@ -175,6 +177,8 @@ components:
         id:
           type: string
         name:
+          type: string
+        documentRefId:
           type: string
         status:
           enum:
@@ -234,28 +238,30 @@ components:
     CreateAIKnowledgeDocument:
       type: object
       required:
-        - aiKnowledgeDocumentData
+        - aIKnowledgeDocumentData
       properties:
-        aiKnowledgeDocumentData:
+        aIKnowledgeDocumentData:
           type: object
           $ref: '#/components/schemas/AIKnowledgeDocument'
     UpdateAIKnowledgeDocument:
       type: object
       required:
-        - aiKnowledgeDocumentData
+        - aIKnowledgeDocumentData
       properties:
-        aiKnowledgeDocumentData:
+        aIKnowledgeDocumentData:
           type: object
           $ref: '#/components/schemas/AIKnowledgeDocument'
     AIKnowledgeDocumentCreateResponse:
       type: object
       required:
         - name
-        - status
+        - documentRefId
       properties:
         id:
           type: string
         name:
+          type: string
+        documentRefId:
           type: string
         status:
           type: string
@@ -267,11 +273,13 @@ components:
       type: object
       required:
         - name
-        - status
+        - documentRefId
       properties:
         id:
           type: string
         name:
+          type: string
+        documentRefId:
           type: string
         status:
           type: string

@@ -9,7 +9,6 @@ import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-deta
 import { ActivatedRoute } from '@angular/router'
 import { AIKnowledgeDocumentDetailsActions } from './aiknowledge-document-details.actions'
 import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
-import { FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-aiknowledge-document-details',
@@ -30,13 +29,12 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
         },
         {
           label: 'DocumentRefId',
-          value: vm.details?.id || '',
+          value: vm.details?.documentRefId || '',
         },
         {
           label: 'Status',
           value: vm.details?.status || '',
-        },
-        //ACTION D1: Add header values here
+        }
       ]
       return labels
     })
@@ -58,29 +56,20 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
           icon: PrimeIcons.ELLIPSIS_V,
           show: 'always',
           btnClass: '',
-          actionCallback: () => {
-            // TODO: add callback
-          }
+          actionCallback: () => { }
         }
       ]
       return actions
     })
   )
 
-  public formGroup: FormGroup;
   statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
 
   constructor(
     private store: Store,
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute
-  ) {
-    this.formGroup = new FormGroup({
-      name: new FormControl(null, [Validators.maxLength(255), Validators.required]),
-      status: new FormControl('', [Validators.required]),
-      // ACTION C3: Add form fields
-    })
-  }
+  ) { }
 
   ngOnInit(): void {
     this.breadcrumbService.setItems([
@@ -90,10 +79,5 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
         routerLink: '/aiknowledge-document'
       }
     ]);
-    this.route.params.subscribe((params) => {
-      if (params['id']) {
-        this.store.dispatch(AIKnowledgeDocumentDetailsActions.loadAiknowledgeDocumentDetails({ id: params['id'] }));
-      }
-    })
   }
 }

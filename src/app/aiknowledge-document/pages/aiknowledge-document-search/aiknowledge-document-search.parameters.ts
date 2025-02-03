@@ -1,10 +1,11 @@
 import { AIKnowledgeDocumentSearchRequest, AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 import { z, ZodTypeAny } from 'zod'
 
-export const aIKnowledgeDocumentSearchCriteriasSchema = z.object({
+export const AIKnowledgeDocumentSearchCriteriasSchema = z.object({
   id: z.string().optional(),
   name: z.string().optional(),
-  // ACTION S2: Please define the members for your aIKnowledgeDocumentSearchCriteriasSchema here
+  documentRefId: z.string().optional(),
+  status: z.string().transform((value) => value as AIKnowledgeDocumentStatusEnum).optional(),
 } satisfies Partial<Record<keyof AIKnowledgeDocumentSearchRequest, ZodTypeAny>>)
 
-export type AIKnowledgeDocumentSearchCriteria = z.infer<typeof aIKnowledgeDocumentSearchCriteriasSchema>
+export type AIKnowledgeDocumentSearchCriteria = z.infer<typeof AIKnowledgeDocumentSearchCriteriasSchema>

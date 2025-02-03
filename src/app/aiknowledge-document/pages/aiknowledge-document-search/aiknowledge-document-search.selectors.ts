@@ -1,44 +1,43 @@
 import { createSelector } from '@ngrx/store'
 import { createChildSelectors } from '@onecx/ngrx-accelerator'
 import { DataTableColumn, RowListGridData } from '@onecx/portal-integration-angular'
-import { aIKnowledgeDocumentFeature } from '../../aiknowledge-document.reducers'
+import { AIKnowledgeDocumentFeature } from '../../aiknowledge-document.reducers'
 import { initialState } from './aiknowledge-document-search.reducers'
 import { AIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.viewmodel'
 
-export const aIKnowledgeDocumentSearchSelectors = createChildSelectors(
-  aIKnowledgeDocumentFeature.selectSearch,
+export const AIKnowledgeDocumentSearchSelectors = createChildSelectors(
+  AIKnowledgeDocumentFeature.selectSearch,
   initialState
 )
 
 export const selectResults = createSelector(
-  aIKnowledgeDocumentSearchSelectors.selectResults,
+  AIKnowledgeDocumentSearchSelectors.selectResults,
   (results): RowListGridData[] => {
     return results.map((item) => ({
       imagePath: '',
       id: item.id ? `${item.id}` : '',
       name: item.name ? `${item.name}` : '',
+      documentRefId: item.documentRefId ? `${item.documentRefId}` : '',
       status: item.status ? `${item.status}` : '',
-      // ...item
-      // ACTION S7: Here you can create a mapping of the items and their corresponding translation strings
     }))
   }
 )
 
 export const selectDisplayedColumns = createSelector(
-  aIKnowledgeDocumentSearchSelectors.selectColumns,
-  aIKnowledgeDocumentSearchSelectors.selectDisplayedColumns,
+  AIKnowledgeDocumentSearchSelectors.selectColumns,
+  AIKnowledgeDocumentSearchSelectors.selectDisplayedColumns,
   (columns, displayedColumns): DataTableColumn[] => {
     return (displayedColumns?.map((d) => columns.find((c) => c.id === d)).filter((d) => d) as DataTableColumn[]) ?? []
   }
 )
 
 export const selectAIKnowledgeDocumentSearchViewModel = createSelector(
-  aIKnowledgeDocumentSearchSelectors.selectColumns,
-  aIKnowledgeDocumentSearchSelectors.selectCriteria,
+  AIKnowledgeDocumentSearchSelectors.selectColumns,
+  AIKnowledgeDocumentSearchSelectors.selectCriteria,
   selectResults,
   selectDisplayedColumns,
-  aIKnowledgeDocumentSearchSelectors.selectViewMode,
-  aIKnowledgeDocumentSearchSelectors.selectChartVisible,
+  AIKnowledgeDocumentSearchSelectors.selectViewMode,
+  AIKnowledgeDocumentSearchSelectors.selectChartVisible,
   (columns, searchCriteria, results, displayedColumns, viewMode, chartVisible): AIKnowledgeDocumentSearchViewModel => ({
     columns,
     searchCriteria,

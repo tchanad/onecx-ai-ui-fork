@@ -12,7 +12,8 @@
 export interface AIKnowledgeDocumentUpdateResponse { 
     id?: string;
     name: string;
-    status: AIKnowledgeDocumentUpdateResponseStatusEnum;
+    documentRefId: string;
+    status?: AIKnowledgeDocumentUpdateResponseStatusEnum;
 }
 export enum AIKnowledgeDocumentUpdateResponseStatusEnum {
     New = 'NEW',

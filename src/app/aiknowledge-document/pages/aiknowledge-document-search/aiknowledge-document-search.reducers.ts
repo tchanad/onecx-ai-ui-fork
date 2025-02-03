@@ -1,12 +1,12 @@
 import { routerNavigatedAction, RouterNavigatedAction } from '@ngrx/router-store'
 import { createReducer, on } from '@ngrx/store'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
-import { aIKnowledgeDocumentSearchColumns } from './aiknowledge-document-search.columns'
-import { aIKnowledgeDocumentSearchCriteriasSchema } from './aiknowledge-document-search.parameters'
+import { AIKnowledgeDocumentSearchColumns } from './aiknowledge-document-search.columns'
+import { AIKnowledgeDocumentSearchCriteriasSchema } from './aiknowledge-document-search.parameters'
 import { AIKnowledgeDocumentSearchState } from './aiknowledge-document-search.state'
 
 export const initialState: AIKnowledgeDocumentSearchState = {
-  columns: aIKnowledgeDocumentSearchColumns,
+  columns: AIKnowledgeDocumentSearchColumns,
   results: [],
   displayedColumns: null,
   viewMode: 'basic',
@@ -15,10 +15,10 @@ export const initialState: AIKnowledgeDocumentSearchState = {
   criteria: {}
 }
 
-export const aIKnowledgeDocumentSearchReducer = createReducer(
+export const AIKnowledgeDocumentSearchReducer = createReducer(
   initialState,
   on(routerNavigatedAction, (state: AIKnowledgeDocumentSearchState, action: RouterNavigatedAction) => {
-    const results = aIKnowledgeDocumentSearchCriteriasSchema.safeParse(action.payload.routerState.root.queryParams)
+    const results = AIKnowledgeDocumentSearchCriteriasSchema.safeParse(action.payload.routerState.root.queryParams)
     if (results.success) {
       return {
         ...state,
@@ -45,14 +45,14 @@ export const aIKnowledgeDocumentSearchReducer = createReducer(
     })
   ),
   on(
-    AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsReceived,
+    AIKnowledgeDocumentSearchActions.aIKnowledgeDocumentSearchResultsReceived,
     (state: AIKnowledgeDocumentSearchState, { results }): AIKnowledgeDocumentSearchState => ({
       ...state,
       results
     })
   ),
   on(
-    AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsLoadingFailed,
+    AIKnowledgeDocumentSearchActions.aIKnowledgeDocumentSearchResultsLoadingFailed,
     (state: AIKnowledgeDocumentSearchState): AIKnowledgeDocumentSearchState => ({
       ...state,
       results: []

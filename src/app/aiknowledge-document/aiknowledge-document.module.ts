@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core'
 import { addInitializeModuleGuard, PortalCoreModule, providePortalDialogService } from '@onecx/portal-integration-angular'
 import { CalendarModule } from 'primeng/calendar'
 import { SharedModule } from '../shared/shared.module'
-import { aIKnowledgeDocumentFeature } from './aiknowledge-document.reducers'
+import { AIKnowledgeDocumentFeature } from './aiknowledge-document.reducers'
 import { routes } from './aiknowledge-document.routes'
 import { AIKnowledgeDocumentDetailsComponent } from './pages/aiknowledge-document-details/aiknowledge-document-details.component'
 import { AIKnowledgeDocumentDetailsEffects } from './pages/aiknowledge-document-details/aiknowledge-document-details.effects'
@@ -34,7 +34,7 @@ import { AIKnowledgeDocumentCreateUpdateComponent } from './pages/aiknowledge-do
     FormsModule,
     ReactiveFormsModule,
     CalendarModule,
-    StoreModule.forFeature(aIKnowledgeDocumentFeature),
+    StoreModule.forFeature(AIKnowledgeDocumentFeature),
     EffectsModule.forFeature([AIKnowledgeDocumentDetailsEffects, AIKnowledgeDocumentSearchEffects]),
     TranslateModule
   ]

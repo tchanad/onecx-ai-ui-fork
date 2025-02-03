@@ -31,8 +31,8 @@ export class AIKnowledgeDocumentCreateUpdateComponent
   constructor() {
     this.formGroup = new FormGroup({
       name: new FormControl(null, [Validators.maxLength(255), Validators.required]),
-      status: new FormControl('', [Validators.required]),
-      // ACTION C3: Add form fields
+      documentRefId: new FormControl(null, [Validators.maxLength(255), Validators.required]),
+      // status: new FormControl('', [Validators.required]),
     })
     this.formGroup.statusChanges
       .pipe(

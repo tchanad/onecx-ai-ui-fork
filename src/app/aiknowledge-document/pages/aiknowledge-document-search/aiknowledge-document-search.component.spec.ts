@@ -14,7 +14,7 @@ import { TranslateTestingModule } from 'ngx-translate-testing'
 import { PrimeIcons } from 'primeng/api'
 import { DialogService } from 'primeng/dynamicdialog'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
-import { aIKnowledgeDocumentSearchColumns } from './aiknowledge-document-search.columns'
+import { AIKnowledgeDocumentSearchColumns } from './aiknowledge-document-search.columns'
 import { AIKnowledgeDocumentSearchComponent } from './aiknowledge-document-search.component'
 import { AIKnowledgeDocumentSearchHarness } from './aiknowledge-document-search.harness'
 import { initialState } from './aiknowledge-document-search.reducers'
@@ -39,8 +39,8 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
@@ -63,7 +63,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     }
   }
   const baseAIKnowledgeDocumentSearchViewModel: AIKnowledgeDocumentSearchViewModel = {
-    columns: aIKnowledgeDocumentSearchColumns,
+    columns: AIKnowledgeDocumentSearchColumns,
     searchCriteria: {
       id: undefined,
       name: undefined
@@ -312,7 +312,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     editButton?.click()
 
     expect(store.dispatch).toHaveBeenCalledWith(
-      AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked({ id: '1' })
+      AIKnowledgeDocumentSearchActions.editAIKnowledgeDocumentButtonClicked({ id: '1' })
     )
   })
 
@@ -326,7 +326,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     await createButton?.click()
 
     expect(store.dispatch).toHaveBeenCalledWith(
-      AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentButtonClicked()
+      AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentButtonClicked()
     )
   })
 

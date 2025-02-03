@@ -31,8 +31,9 @@
       "HEADER": "AIKnowledgeDocument bearbeiten"
     },
     "FORM": {
-      "ID": "DokumentRefId",
+      "ID": "id",
       "NAME": "Name",
+      "DOCUMENTREFID": "DokumentRefId",
       "STATUS": "Status"
     }
   },
@@ -50,7 +51,7 @@
     },
     "UPDATE": {
       "NAME": "Name",
-      "STATUS": "Status"
+      "DOCUMENTREFID": "DokumentRefId"
     }
   },
   "AI_KNOWLEDGE_DOCUMENT_SEARCH": {
@@ -81,12 +82,15 @@
       "NAME": "Name"
     },
     "CRITERIA": {
-      "ID": "DokumentRefId",
-      "NAME": "Name"
+      "ID": "id",
+      "NAME": "Name",
+      "DOCUMENTREFID": "DokumentRefId",
+      "STATUS": "Status"
     },
     "COLUMNS": {
-      "ID": "DokumentRefId",
+      "ID": "id",
       "NAME": "Name",
+      "DOCUMENTREFID": "DokumentRefId",
       "STATUS": "Status"
     },
     "PREDEFINED_GROUP": {

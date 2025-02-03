@@ -7,7 +7,14 @@
           {{ 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.NAME' | translate }}</label>
       </span>
     </div>
-    <div [title]="'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.STATUS' | translate">
+    <div [title]="'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.DOCUMENTREFID' | translate">
+      <span class="p-float-label" controlErrorAnchor>
+        <input pInputText type="text" id="documentRefId" class="w-full pt-3 pb-2" formControlName="documentRefId" />
+        <label class="ocx-required-label" for="documentRefId">
+          {{ 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.DOCUMENTREFID' | translate }}</label>
+      </span>
+    </div>
+    <!-- <div [title]="'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.STATUS' | translate">
       <span class="p-float-label" controlErrorAnchor>
         <select id="status" class="w-full pt-3 pb-2" formControlName="status">
           <option *ngFor="let status of statusValues" [value]="status">{{ status }}</option>
@@ -15,7 +22,6 @@
         <label class="ocx-required-label" for="status">
           {{ 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.FORM.STATUS' | translate }}</label>
       </span>
-    </div>
-    <!-- ACTION C2: Extend form fields -->
+    </div> -->
   </div>
 </form>

@@ -23,9 +23,9 @@ import { selectUrl } from 'src/app/shared/selectors/router.selectors'
 import { AIKnowledgeDocumentBffService } from '../../../shared/generated'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
 import { AIKnowledgeDocumentSearchComponent } from './aiknowledge-document-search.component'
-import { aIKnowledgeDocumentSearchCriteriasSchema } from './aiknowledge-document-search.parameters'
+import { AIKnowledgeDocumentSearchCriteriasSchema } from './aiknowledge-document-search.parameters'
 import {
-  aIKnowledgeDocumentSearchSelectors,
+  AIKnowledgeDocumentSearchSelectors,
   selectAIKnowledgeDocumentSearchViewModel
 } from './aiknowledge-document-search.selectors'
 import { AIKnowledgeDocumentCreateUpdateComponent } from './dialogs/aiknowledge-document-create-update/aiknowledge-document-create-update.component'
@@ -51,16 +51,14 @@ export class AIKnowledgeDocumentSearchEffects {
           AIKnowledgeDocumentSearchActions.resetButtonClicked
         ),
         concatLatestFrom(() => [
-          this.store.select(aIKnowledgeDocumentSearchSelectors.selectCriteria),
+          this.store.select(AIKnowledgeDocumentSearchSelectors.selectCriteria),
           this.route.queryParams
         ]),
         tap(([, criteria, queryParams]) => {
-          const results = aIKnowledgeDocumentSearchCriteriasSchema.safeParse(queryParams)
+          const results = AIKnowledgeDocumentSearchCriteriasSchema.safeParse(queryParams)
           if (!results.success || !equal(criteria, results.data)) {
             const params = {
               ...criteria
-              //TODO: Move to docs to explain how to only put the date part in the URL in case you have date and not datetime
-              //exampleDate: criteria.exampleDate?.toISOString()?.slice(0, 10)
             }
             this.router.navigate([], {
               relativeTo: this.route,
@@ -94,18 +92,18 @@ export class AIKnowledgeDocumentSearchEffects {
   refreshSearchAfterCreateUpdate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(
-        AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentSucceeded,
-        AIKnowledgeDocumentSearchActions.updateAiknowledgeDocumentSucceeded
+        AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentSucceeded,
+        AIKnowledgeDocumentSearchActions.updateAIKnowledgeDocumentSucceeded
       ),
-      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectCriteria)),
+      concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectCriteria)),
       switchMap(([, searchCriteria]) => this.performSearch(searchCriteria))
     )
   })
 
   editButtonClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked),
-      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectResults)),
+      ofType(AIKnowledgeDocumentSearchActions.editAIKnowledgeDocumentButtonClicked),
+      concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectResults)),
       map(([action, results]) => {
         return results.find((item) => item.id == action.id)
       }),
@@ -129,21 +127,21 @@ export class AIKnowledgeDocumentSearchEffects {
       }),
       switchMap((dialogResult) => {
         if (!dialogResult || dialogResult.button == 'secondary') {
-          return of(AIKnowledgeDocumentSearchActions.updateAiknowledgeDocumentCancelled())
+          return of(AIKnowledgeDocumentSearchActions.updateAIKnowledgeDocumentCancelled())
         }
         if (!dialogResult?.result) {
           throw new Error('DialogResult was not set as expected!')
         }
         const itemToEditId = dialogResult.result.id
         const itemToEdit = {
-          aiKnowledgeDocumentData: dialogResult.result
+          aIKnowledgeDocumentData: dialogResult.result
         } as UpdateAIKnowledgeDocument
         return this.aIKnowledgeDocumentService.updateAIKnowledgeDocument(itemToEditId, itemToEdit).pipe(
           map(() => {
             this.messageService.success({
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.UPDATE.SUCCESS'
             })
-            return AIKnowledgeDocumentSearchActions.updateAiknowledgeDocumentSucceeded()
+            return AIKnowledgeDocumentSearchActions.updateAIKnowledgeDocumentSucceeded()
           })
         )
       }),
@@ -152,7 +150,7 @@ export class AIKnowledgeDocumentSearchEffects {
           summaryKey: 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.UPDATE.ERROR'
         })
         return of(
-          AIKnowledgeDocumentSearchActions.updateAiknowledgeDocumentFailed({
+          AIKnowledgeDocumentSearchActions.updateAIKnowledgeDocumentFailed({
             error
           })
         )
@@ -162,7 +160,7 @@ export class AIKnowledgeDocumentSearchEffects {
 
   createButtonClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentButtonClicked),
+      ofType(AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentButtonClicked),
       switchMap(() => {
         return this.portalDialogService.openDialog<AIKnowledgeDocument | undefined>(
           'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.CREATE.HEADER',
@@ -183,20 +181,20 @@ export class AIKnowledgeDocumentSearchEffects {
       }),
       switchMap((dialogResult) => {
         if (!dialogResult || dialogResult.button == 'secondary') {
-          return of(AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentCancelled())
+          return of(AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentCancelled())
         }
         if (!dialogResult?.result) {
           throw new Error('DialogResult was not set as expected!')
         }
         const toCreateItem = {
-          aiKnowledgeDocumentData: dialogResult.result
+          aIKnowledgeDocumentData: dialogResult.result
         } as CreateAIKnowledgeDocument
         return this.aIKnowledgeDocumentService.createAIKnowledgeDocument(toCreateItem).pipe(
           map(() => {
             this.messageService.success({
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.CREATE.SUCCESS'
             })
-            return AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentSucceeded()
+            return AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentSucceeded()
           })
         )
       }),
@@ -205,7 +203,7 @@ export class AIKnowledgeDocumentSearchEffects {
           summaryKey: 'AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE.CREATE.ERROR'
         })
         return of(
-          AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentFailed({
+          AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentFailed({
             error
           })
         )
@@ -215,16 +213,16 @@ export class AIKnowledgeDocumentSearchEffects {
 
   refreshSearchAfterDelete$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentSucceeded),
-      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectCriteria)),
+      ofType(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentSucceeded),
+      concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectCriteria)),
       switchMap(([, searchCriteria]) => this.performSearch(searchCriteria))
     )
   })
 
   deleteButtonClicked$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentButtonClicked),
-      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectResults)),
+      ofType(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentButtonClicked),
+      concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectResults)),
       map(([action, results]) => {
         console.log('Action:', action);
         console.log('Results:', results);
@@ -259,7 +257,7 @@ export class AIKnowledgeDocumentSearchEffects {
         if (!dialogResult || dialogResult.button == 'secondary') {
           console.log('Dialog result:', dialogResult);
           console.log('Item to delete after dialog:', itemToDelete);
-          return of(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentCancelled())
+          return of(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentCancelled())
         }
         if (!itemToDelete) {
           throw new Error('Item to delete not found!')
@@ -272,7 +270,7 @@ export class AIKnowledgeDocumentSearchEffects {
             this.messageService.success({
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.SUCCESS'
             })
-            return AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentSucceeded()
+            return AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentSucceeded()
           }),
           catchError((error) => {
             console.log('Error:', error);
@@ -280,7 +278,7 @@ export class AIKnowledgeDocumentSearchEffects {
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.ERROR'
             })
             return of(
-              AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentFailed({
+              AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentFailed({
                 error
               })
             )
@@ -294,8 +292,8 @@ export class AIKnowledgeDocumentSearchEffects {
     return this.actions$.pipe(
       ofType(routerNavigatedAction),
       filterForNavigatedTo(this.router, AIKnowledgeDocumentSearchComponent),
-      filterOutQueryParamsHaveNotChanged(this.router, aIKnowledgeDocumentSearchCriteriasSchema, false),
-      concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectCriteria)),
+      filterOutQueryParamsHaveNotChanged(this.router, AIKnowledgeDocumentSearchCriteriasSchema, false),
+      concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectCriteria)),
       switchMap(([, searchCriteria]) => this.performSearch(searchCriteria))
     )
   })
@@ -313,14 +311,14 @@ export class AIKnowledgeDocumentSearchEffects {
       })
       .pipe(
         map(({ results, totalNumberOfResults }) =>
-          AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsReceived({
+          AIKnowledgeDocumentSearchActions.aIKnowledgeDocumentSearchResultsReceived({
             results,
             totalNumberOfResults
           })
         ),
         catchError((error) =>
           of(
-            AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsLoadingFailed({
+            AIKnowledgeDocumentSearchActions.aIKnowledgeDocumentSearchResultsLoadingFailed({
               error
             })
           )
@@ -345,7 +343,7 @@ export class AIKnowledgeDocumentSearchEffects {
     () => {
       return this.actions$.pipe(
         ofType(AIKnowledgeDocumentSearchActions.chartVisibilityToggled),
-        concatLatestFrom(() => this.store.select(aIKnowledgeDocumentSearchSelectors.selectChartVisible)),
+        concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectChartVisible)),
         tap(([, chartVisible]) => {
           localStorage.setItem('aIKnowledgeDocumentChartVisibility', String(chartVisible))
         })
@@ -369,7 +367,7 @@ export class AIKnowledgeDocumentSearchEffects {
 
   errorMessages: { action: Action; key: string }[] = [
     {
-      action: AIKnowledgeDocumentSearchActions.aiknowledgeDocumentSearchResultsLoadingFailed,
+      action: AIKnowledgeDocumentSearchActions.aIKnowledgeDocumentSearchResultsLoadingFailed,
       key: 'AI_KNOWLEDGE_DOCUMENT_SEARCH.ERROR_MESSAGES.SEARCH_RESULTS_LOADING_FAILED'
     }
   ]

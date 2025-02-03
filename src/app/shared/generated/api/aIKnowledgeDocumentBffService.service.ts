@@ -287,7 +287,7 @@ export class AIKnowledgeDocumentBffService {
     }
 
     /**
-     * This operation performs a search based on provided search criteria. Search for aIKnowledgeDocument results.
+     * This operation performs a search based on provided search criteria. Search for AIKnowledgeDocument results.
      * @param aIKnowledgeDocumentSearchRequest 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.

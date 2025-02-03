@@ -22,14 +22,14 @@ app:
       spec:
         permissions:
           AI_KNOWLEDGE_DOCUMENT:
-            CREATE: Create aIKnowledgeDocument
-            EDIT: Edit aIKnowledgeDocument
-            DELETE: Delete aIKnowledgeDocument
-            SAVE: Update and save aIKnowledgeDocument
-            IMPORT: Import aIKnowledgeDocument
-            EXPORT: Export aIKnowledgeDocument
-            VIEW: View mode for aIKnowledgeDocument
-            SEARCH: Search aIKnowledgeDocument
+            CREATE: Create AIKnowledgeDocument
+            EDIT: Edit AIKnowledgeDocument
+            DELETE: Delete AIKnowledgeDocument
+            SAVE: Update and save AIKnowledgeDocument
+            IMPORT: Import AIKnowledgeDocument
+            EXPORT: Export AIKnowledgeDocument
+            VIEW: View mode for AIKnowledgeDocument
+            SEARCH: Search AIKnowledgeDocument
     keycloak:
       client:
         enabled: true

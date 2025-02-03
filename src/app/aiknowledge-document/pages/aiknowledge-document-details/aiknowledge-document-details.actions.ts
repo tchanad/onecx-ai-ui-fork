@@ -7,11 +7,11 @@ export const AIKnowledgeDocumentDetailsActions = createActionGroup({
     'navigated to details page': props<{
       id: string | undefined
     }>(),
-    'aiknowledge document details received': props<{
+    'AIKnowledge Document details received': props<{
       details: AIKnowledgeDocument
     }>(),
-    'aiknowledge document details loading failed': props<{ error: string | null }>(),
-    'load aiknowledge document details': props<{
+    'AIKnowledge Document details loading failed': props<{ error: string | null }>(),
+    'load AIKnowledge Document details': props<{
       id: string
     }>()
   }

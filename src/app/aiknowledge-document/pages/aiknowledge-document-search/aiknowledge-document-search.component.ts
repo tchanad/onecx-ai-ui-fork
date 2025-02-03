@@ -14,10 +14,11 @@ import { map, Observable } from 'rxjs'
 import { AIKnowledgeDocumentSearchActions } from './aiknowledge-document-search.actions'
 import {
   AIKnowledgeDocumentSearchCriteria,
-  aIKnowledgeDocumentSearchCriteriasSchema
+  AIKnowledgeDocumentSearchCriteriasSchema
 } from './aiknowledge-document-search.parameters'
 import { selectAIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.selectors'
 import { AIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.viewmodel'
+import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 
 @Component({
   selector: 'app-aiknowledge-document-search',
@@ -29,7 +30,6 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
     selectAIKnowledgeDocumentSearchViewModel
   )
 
-  // ACTION S10: Update header actions
   headerActions$: Observable<Action[]> = this.viewModel$.pipe(
     map((vm) => {
       const actions: Action[] = [
@@ -61,15 +61,14 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
       return actions
     })
   )
-
-  // ACTION S9: Please select the column to be displayed in the diagram
-  diagramColumnId = 'id'
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
+  diagramColumnId = 'status'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)
   )
 
   public aIKnowledgeDocumentSearchFormGroup: FormGroup = this.formBuilder.group({
-    ...(Object.fromEntries(aIKnowledgeDocumentSearchCriteriasSchema.keyof().options.map((k) => [k, null])) as Record<
+    ...(Object.fromEntries(AIKnowledgeDocumentSearchCriteriasSchema.keyof().options.map((k) => [k, null])) as Record<
       keyof AIKnowledgeDocumentSearchCriteria,
       unknown
     >)
@@ -121,15 +120,15 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
   }
 
   create() {
-    this.store.dispatch(AIKnowledgeDocumentSearchActions.createAiknowledgeDocumentButtonClicked())
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.createAIKnowledgeDocumentButtonClicked())
   }
 
   edit({ id }: RowListGridData) {
-    this.store.dispatch(AIKnowledgeDocumentSearchActions.editAiknowledgeDocumentButtonClicked({ id }))
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.editAIKnowledgeDocumentButtonClicked({ id }))
   }
 
   delete({ id }: RowListGridData) {
-    this.store.dispatch(AIKnowledgeDocumentSearchActions.deleteAiknowledgeDocumentButtonClicked({ id }))
+    this.store.dispatch(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentButtonClicked({ id }))
   }
 
   resetSearch() {

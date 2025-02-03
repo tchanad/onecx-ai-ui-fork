@@ -13,6 +13,7 @@ export interface AIKnowledgeDocument {
     modificationCount?: number;
     id: string;
     name: string;
+    documentRefId?: string;
     status?: AIKnowledgeDocumentStatusEnum;
 }
 export enum AIKnowledgeDocumentStatusEnum {

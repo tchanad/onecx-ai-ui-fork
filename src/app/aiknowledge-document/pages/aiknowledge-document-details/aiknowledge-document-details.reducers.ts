@@ -6,17 +6,17 @@ export const initialState: AIKnowledgeDocumentDetailsState = {
   details: undefined
 }
 
-export const aIKnowledgeDocumentDetailsReducer = createReducer(
+export const AIKnowledgeDocumentDetailsReducer = createReducer(
   initialState,
   on(
-    AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsReceived,
+    AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsReceived,
     (state: AIKnowledgeDocumentDetailsState, { details }): AIKnowledgeDocumentDetailsState => ({
       ...state,
       details
     })
   ),
   on(
-    AIKnowledgeDocumentDetailsActions.aiknowledgeDocumentDetailsLoadingFailed,
+    AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed,
     (state: AIKnowledgeDocumentDetailsState): AIKnowledgeDocumentDetailsState => ({
       ...state,
       details: undefined

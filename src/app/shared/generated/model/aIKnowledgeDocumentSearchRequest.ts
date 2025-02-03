@@ -13,6 +13,7 @@ export interface AIKnowledgeDocumentSearchRequest {
     limit?: number;
     id?: string;
     name?: string;
+    documentRefId?: string;
     status?: AIKnowledgeDocumentSearchRequestStatusEnum;
 }
 export enum AIKnowledgeDocumentSearchRequestStatusEnum {

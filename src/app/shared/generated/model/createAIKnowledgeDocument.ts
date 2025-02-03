@@ -11,6 +11,6 @@ import { AIKnowledgeDocument } from './aIKnowledgeDocument';
 
 
 export interface CreateAIKnowledgeDocument { 
-    aiKnowledgeDocumentData: AIKnowledgeDocument;
+    aIKnowledgeDocumentData: AIKnowledgeDocument;
 }
 

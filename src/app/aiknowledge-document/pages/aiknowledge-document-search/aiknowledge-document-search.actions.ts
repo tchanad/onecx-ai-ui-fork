@@ -6,27 +6,27 @@ import { AIKnowledgeDocumentSearchCriteria } from './aiknowledge-document-search
 export const AIKnowledgeDocumentSearchActions = createActionGroup({
   source: 'AIKnowledgeDocumentSearch',
   events: {
-    'Delete aiknowledge document button clicked': props<{
+    'Delete AIKnowledge Document button clicked': props<{
       id: number | string
     }>(),
-    'Delete aiknowledge document cancelled': emptyProps(),
-    'Delete aiknowledge document succeeded': emptyProps(),
-    'Delete aiknowledge document failed': props<{
+    'Delete AIKnowledge Document cancelled': emptyProps(),
+    'Delete AIKnowledge Document succeeded': emptyProps(),
+    'Delete AIKnowledge Document failed': props<{
       error: string | null
     }>(),
 
-    'Create aiknowledge document button clicked': emptyProps(),
-    'Edit aiknowledge document button clicked': props<{
+    'Create AIKnowledge Document button clicked': emptyProps(),
+    'Edit AIKnowledge Document button clicked': props<{
       id: number | string
     }>(),
-    'Create aiknowledge document cancelled': emptyProps(),
-    'Update aiknowledge document cancelled': emptyProps(),
-    'Create aiknowledge document succeeded': emptyProps(),
-    'Update aiknowledge document succeeded': emptyProps(),
-    'Create aiknowledge document failed': props<{
+    'Create AIKnowledge Document cancelled': emptyProps(),
+    'Update AIKnowledge Document cancelled': emptyProps(),
+    'Create AIKnowledge Document succeeded': emptyProps(),
+    'Update AIKnowledge Document succeeded': emptyProps(),
+    'Create AIKnowledge Document failed': props<{
       error: string | null
     }>(),
-    'Update aiknowledge document failed': props<{
+    'Update AIKnowledge Document failed': props<{
       error: string | null
     }>(),
 
@@ -38,11 +38,11 @@ export const AIKnowledgeDocumentSearchActions = createActionGroup({
       searchCriteria: AIKnowledgeDocumentSearchCriteria
     }>(),
     'Reset button clicked': emptyProps(),
-    'aiknowledge document search results received': props<{
+    'AIKnowledge Document search results received': props<{
       results: AIKnowledgeDocument[]
       totalNumberOfResults: number
     }>(),
-    'aiknowledge document search results loading failed': props<{ error: string | null }>(),
+    'AIKnowledge Document search results loading failed': props<{ error: string | null }>(),
     'Displayed columns changed': props<{
       displayedColumns: DataTableColumn[]
     }>(),
