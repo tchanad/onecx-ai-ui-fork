@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ActivatedRoute } from '@angular/router'
 import { LetDirective } from '@ngrx/component'
 import { ofType } from '@ngrx/effects'
-import { Store, StoreModule } from '@ngrx/store'
+import { Action, Store, StoreModule } from '@ngrx/store'
 import { MockStore, provideMockStore } from '@ngrx/store/testing'
 import { TranslateService } from '@ngx-translate/core'
 import { BreadcrumbService, ColumnType, PortalCoreModule, UserService } from '@onecx/portal-integration-angular'
@@ -20,6 +20,7 @@ import { AIKnowledgeDocumentSearchHarness } from './aiknowledge-document-search.
 import { initialState } from './aiknowledge-document-search.reducers'
 import { selectAIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.selectors'
 import { AIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.viewmodel'
+
 
 describe('AIKnowledgeDocumentSearchComponent', () => {
   const origAddEventListener = window.addEventListener
@@ -122,6 +123,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     const translateService = TestBed.inject(TranslateService)
     translateService.use('en')
     formBuilder = TestBed.inject(FormBuilder)
+
 
     store = TestBed.inject(MockStore)
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, baseAIKnowledgeDocumentSearchViewModel)
@@ -559,4 +561,5 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
     expect(diagram).toBeTruthy()
   })
-})
+
+});
