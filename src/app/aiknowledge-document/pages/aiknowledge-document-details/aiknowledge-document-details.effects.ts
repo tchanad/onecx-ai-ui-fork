@@ -57,31 +57,6 @@ export class AIKnowledgeDocumentDetailsEffects {
     )
   })
 
-  loadAIKnowledgeDocumentDetails$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AIKnowledgeDocumentDetailsActions.loadAIKnowledgeDocumentDetails),
-      tap(() => console.log('Loading AIKnowledgeDocument details...')),
-      mergeMap((action) =>
-        this.aIKnowledgeDocumentService.getAIKnowledgeDocumentById(action.id).pipe(
-          map((response) => {
-            console.log('AIKnowledgeDocument details loaded:', response.result);
-            return AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsReceived({
-              details: response.result,
-            });
-          }),
-          catchError((error) => {
-            console.log('Error loading AIKnowledgeDocument details:', error);
-            return of(
-              AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed({
-                error: error.message,
-              })
-            );
-          })
-        )
-      )
-    )
-  )
-
   errorMessages: { action: Action; key: string }[] = [
     {
       action: AIKnowledgeDocumentDetailsActions.aIKnowledgeDocumentDetailsLoadingFailed,

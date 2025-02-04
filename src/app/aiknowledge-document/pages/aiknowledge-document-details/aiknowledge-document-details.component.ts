@@ -50,13 +50,6 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
           actionCallback: () => {
             window.history.back()
           }
-        },
-        {
-          titleKey: 'AI_KNOWLEDGE_DOCUMENT_DETAILS.GENERAL.MORE',
-          icon: PrimeIcons.ELLIPSIS_V,
-          show: 'always',
-          btnClass: '',
-          actionCallback: () => { }
         }
       ]
       return actions

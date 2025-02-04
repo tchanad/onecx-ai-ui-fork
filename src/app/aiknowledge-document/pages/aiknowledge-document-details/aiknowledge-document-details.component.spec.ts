@@ -34,8 +34,8 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => {},
-        stopPropagation: () => {}
+        stopImmediatePropagation: () => { },
+        stopPropagation: () => { }
       })
     )
   }
@@ -122,16 +122,13 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
     expect(await pageHeader.getSubheaderText()).toEqual('Display of AIKnowledgeDocument Details')
   })
 
-  it('should have 2 inline actions', async () => {
+  it('should have 1 inline actions', async () => {
     const pageHeader = await aIKnowledgeDocumentDetails.getHeader()
     const inlineActions = await pageHeader.getInlineActionButtons()
-    expect(inlineActions.length).toBe(2)
+    expect(inlineActions.length).toBe(1)
 
     const backAction = await pageHeader.getInlineActionButtonByLabel('Back')
     expect(backAction).toBeTruthy()
-
-    const moreAction = await pageHeader.getInlineActionButtonByIcon(PrimeIcons.ELLIPSIS_V)
-    expect(moreAction).toBeTruthy()
   })
 
   it('should navigate back on back button click', async () => {

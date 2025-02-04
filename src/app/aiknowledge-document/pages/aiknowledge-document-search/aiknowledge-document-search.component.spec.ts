@@ -389,10 +389,6 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
       AIKnowledgeDocumentSearchHarness
     )
 
-    // expect(store.dispatch).toHaveBeenCalledWith(
-    //   AIKnowledgeDocumentSearchActions.displayedColumnsChanged({ displayedColumns: [] })
-    // )
-
     jest.clearAllMocks()
 
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {

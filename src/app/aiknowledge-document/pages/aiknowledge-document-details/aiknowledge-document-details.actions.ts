@@ -11,8 +11,5 @@ export const AIKnowledgeDocumentDetailsActions = createActionGroup({
       details: AIKnowledgeDocument
     }>(),
     'AIKnowledge Document details loading failed': props<{ error: string | null }>(),
-    'load AIKnowledge Document details': props<{
-      id: string
-    }>()
   }
 })
