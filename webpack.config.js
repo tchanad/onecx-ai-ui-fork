@@ -5,6 +5,7 @@ const {
   share,
   withModuleFederationPlugin,
 } = require('@angular-architects/module-federation/webpack');
+const webpack = require("webpack");
 const config = withModuleFederationPlugin({
   name: 'onecx-ai-ui-app',
   filename: 'remoteEntry.js',
@@ -93,7 +94,12 @@ const plugins = config.plugins.filter(
 
 module.exports = {
   ...config,
-  plugins,
+  plugins: [
+    new webpack.DefinePlugin({
+      ngDevMode: "undefined",
+    }),
+    ...plugins
+  ],
   output: {
     uniqueName: 'onecx-ai-ui',
     publicPath: 'auto',
