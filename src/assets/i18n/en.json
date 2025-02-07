@@ -100,5 +100,105 @@
       "EXTENDED": "Extended",
       "FULL": "Full"
     }
+  },
+  "AI_KNOWLEDGE_DOCUMENT_DELETE": {
+    "HEADER": "Delete AIKnowledgeDocument",
+    "MESSAGE": "Please confirm that you want to delete this AIKnowledgeDocument.",
+    "CONFIRM": "Confirm",
+    "CANCEL": "Cancel",
+    "SUCCESS": "AIKnowledgeDocument deleted successfully",
+    "ERROR": "Could not delete AIKnowledgeDocument"
+  },
+  "AI_KNOWLEDGE_DOCUMENT_CREATE_UPDATE": {
+    "ACTION": {
+      "CREATE": "Create"
+    },
+    "CREATE": {
+      "HEADER": "Create AIKnowledgeDocument",
+      "SUCCESS": "Creation succesful",
+      "ERROR": "Creation failed",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      }
+    },
+    "UPDATE": {
+      "SUCCESS": "Update successful",
+      "FAILED": "ACTION: Add Translation",
+      "ERROR": "Update failed",
+      "FORM": {
+        "SAVE": "Save",
+        "CANCEL": "Cancel"
+      },
+      "HEADER": "Update AIKnowledgeDocument"
+    },
+    "FORM": {
+      "ID": "id",
+      "NAME": "Name",
+      "DOCUMENTREFID": "DocumentRefId",
+      "STATUS": "Status"
+    }
+  },
+  "AI_KNOWLEDGE_DOCUMENT_DETAILS": {
+    "HELP_ARTICLE_ID": "Help Article",
+    "BREADCRUMB": "Details",
+    "HEADER": "AIKnowledgeDocument Details",
+    "SUB_HEADER": "Display of AIKnowledgeDocument Details",
+    "ERROR_MESSAGES": {
+      "DETAILS_LOADING_FAILED": "Loading details failed."
+    },
+    "GENERAL": {
+      "BACK": "Back",
+      "MORE": "More"
+    },
+    "UPDATE": {
+      "NAME": "Name",
+      "DOCUMENTREFID": "DocumentRefId"
+    }
+  },
+  "AI_KNOWLEDGE_DOCUMENT_SEARCH": {
+    "HEADER": "AIKnowledgeDocument Search",
+    "SUB_HEADER": "Searching and displaying of AIKnowledgeDocument",
+    "HELP_ARTICLE_ID": "Help Article",
+    "EMPTY_RESULTS": "No results.",
+    "BREADCRUMB": "Search",
+    "DIAGRAM": {
+      "SUM": "Total"
+    },
+    "HEADER_ACTIONS": {
+      "EXPORT_ALL": "Export all",
+      "SHOW_CHART": "Show chart",
+      "HIDE_CHART": "Hide chart",
+      "CREATE_SEARCH_CONFIG": "Create search configuration",
+      "UPDATE_SEARCH_CONFIG": "Update search configuration",
+      "DIALOG_CONFIRM": "Confirm",
+      "DIALOG_CANCEL": "Cancel"
+    },
+    "ERROR_MESSAGES": {
+      "SEARCH_RESULTS_LOADING_FAILED": "Loading search results failed.",
+      "SEARCH_CONFIG_CREATION_FAILED": "Create search configuration failed.",
+      "SEARCH_CONFIG_UPDATE_FAILED": "Update search configuration failed.",
+      "SEARCH_CONFIGS_LOADING_FAILED": "Loading search configurations failed."
+    },
+    "INPUT_FIELDS": {
+      "NAME": "Name"
+    },
+    "CRITERIA": {
+      "ID": "id",
+      "NAME": "Name",
+      "DOCUMENTREFID": "DocumentRefId",
+      "STATUS": "Status"
+    },
+    "COLUMNS": {
+      "ID": "id",
+      "NAME": "Name",
+      "DOCUMENTREFID": "DocumentRefId",
+      "STATUS": "Status"
+    },
+    "PREDEFINED_GROUP": {
+      "DEFAULT": "Default",
+      "EXTENDED": "Extended",
+      "FULL": "Full"
+    }
   }
 }

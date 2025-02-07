@@ -21,6 +21,15 @@ app:
       enabled: true
       spec:
         permissions:
+          AI_KNOWLEDGE_DOCUMENT:
+            CREATE: Create AIKnowledgeDocument
+            EDIT: Edit AIKnowledgeDocument
+            DELETE: Delete AIKnowledgeDocument
+            SAVE: Update and save AIKnowledgeDocument
+            IMPORT: Import AIKnowledgeDocument
+            EXPORT: Export AIKnowledgeDocument
+            VIEW: View mode for AIKnowledgeDocument
+            SEARCH: Search AIKnowledgeDocument
           AI_KNOWLEDGE_VECTOR_DB:
             CREATE: Create AIKnowledgeVectorDb
             EDIT: Edit AIKnowledgeVectorDb

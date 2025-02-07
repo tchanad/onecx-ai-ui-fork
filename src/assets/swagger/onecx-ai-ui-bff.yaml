@@ -149,7 +149,148 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetailResponse'
-                
+  /aIKnowledgeDocument/search:
+    post:
+      operationId: searchAIKnowledgeDocuments
+      tags:
+        - AIKnowledgeDocumentBffService
+      description: This operation performs a search based on provided search criteria.
+        Search for AIKnowledgeDocument results.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AIKnowledgeDocumentSearchRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeDocumentSearchResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Something went wrong
+  /aIKnowledgeDocument/{id}:
+    get:
+      x-onecx:
+        permissions:
+          AIKnowledgeDocument:
+            - read
+      operationId: getAIKnowledgeDocumentById
+      tags:
+        - AIKnowledgeDocumentBffService
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAIKnowledgeDocumentByIdResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+    put:
+      operationId: updateAIKnowledgeDocument
+      tags:
+        - AIKnowledgeDocumentBffService
+      description: This operation performs an update.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAIKnowledgeDocument'
+      responses:
+        '204':
+          description: AIKnowledgeDocument updated
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeDocumentUpdateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+        '404':
+          description: AIKnowledgeDocument not found
+    delete:
+      tags:
+        - AIKnowledgeDocumentBffService
+      operationId: deleteAIKnowledgeDocument
+      description: Delete AIKnowledgeDocument by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: AIKnowledgeDocument deleted
+  /aIKnowledgeDocument:
+    post:
+      operationId: createAIKnowledgeDocument
+      tags:
+        - AIKnowledgeDocumentBffService
+      description: This operation performs a create.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAIKnowledgeDocument'
+      responses:
+        '201':
+          description: New AIKnowledgeDocument created
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeDocumentCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'                
 components:
   schemas:
     AIKnowledgeVectorDb:
@@ -291,3 +432,114 @@ components:
       properties:
         appId:
           type: string
+    AIKnowledgeDocument:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        modificationCount:
+          type: integer
+          format: int32
+        id:
+          type: string
+        name:
+          type: string
+        documentRefId:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED
+    AIKnowledgeDocumentSearchRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          maximum: 2500
+        id:
+          type: string
+        name:
+          type: string
+        documentRefId:
+          type: string
+        status:
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED
+    AIKnowledgeDocumentSearchResponse:
+      type: object
+      required:
+        - results
+        - totalNumberOfResults
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIKnowledgeDocument'
+        totalNumberOfResults:
+          type: integer
+          format: int32
+          description: Total number of results on the server.    
+    GetAIKnowledgeDocumentByIdResponse:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          $ref: '#/components/schemas/AIKnowledgeDocument'
+    CreateAIKnowledgeDocument:
+      type: object
+      required:
+        - aIKnowledgeDocumentData
+      properties:
+        aIKnowledgeDocumentData:
+          type: object
+          $ref: '#/components/schemas/AIKnowledgeDocument'
+    UpdateAIKnowledgeDocument:
+      type: object
+      required:
+        - aIKnowledgeDocumentData
+      properties:
+        aIKnowledgeDocumentData:
+          type: object
+          $ref: '#/components/schemas/AIKnowledgeDocument'
+    AIKnowledgeDocumentCreateResponse:
+      type: object
+      required:
+        - name
+        - documentRefId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        documentRefId:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED
+    AIKnowledgeDocumentUpdateResponse:
+      type: object
+      required:
+        - name
+        - documentRefId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        documentRefId:
+          type: string
+        status:
+          type: string
+          enum:
+            - NEW
+            - PROCESSING
+            - EMBEDDED          

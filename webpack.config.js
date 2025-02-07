@@ -1,115 +1,108 @@
-const {
-  ModifyEntryPlugin,
-} = require('@angular-architects/module-federation/src/utils/modify-entry-plugin');
-const {
-  share,
-  withModuleFederationPlugin,
-} = require('@angular-architects/module-federation/webpack');
-const webpack = require("webpack");
+const webpack = require('webpack')
+const { ModifyEntryPlugin } = require('@angular-architects/module-federation/src/utils/modify-entry-plugin')
+const { share, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack')
 const config = withModuleFederationPlugin({
   name: 'onecx-ai-ui-app',
   filename: 'remoteEntry.js',
   exposes: {
-    './OnecxAiUiModule': './src/bootstrap.ts',
+    './OnecxAiUiModule': './src/bootstrap.ts'
   },
   shared: share({
     '@angular/core': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@angular/platform-browser': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@angular/forms': {
       requiredVersion: 'auto',
       includeSecondaries: true,
-      eager: false,
+      eager: false
     },
     '@angular/common': {
       requiredVersion: 'auto',
       includeSecondaries: {
-        skip: ['@angular/common/http/testing'],
-      },
+        skip: ['@angular/common/http/testing']
+      }
     },
     '@angular/common/http': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@angular/router': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     rxjs: {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/accelerator': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/angular-accelerator': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/angular-auth': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/angular-remote-components': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/angular-webcomponents': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/integration-interface': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/keycloak-auth': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/portal-integration-angular': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@onecx/portal-layout-styles': {
       requiredVersion: 'auto',
-      includeSecondaries: true,
+      includeSecondaries: true
     },
     '@ngx-translate/core': {
-      requiredVersion: 'auto',
-    },
+      requiredVersion: 'auto'
+    }
   }),
 
-  sharedMappings: ['@onecx/portal-integration-angular'],
-});
+  sharedMappings: ['@onecx/portal-integration-angular']
+})
 
-const plugins = config.plugins.filter(
-  (plugin) => !(plugin instanceof ModifyEntryPlugin)
-);
+const plugins = config.plugins.filter((plugin) => !(plugin instanceof ModifyEntryPlugin))
 
 module.exports = {
   ...config,
   plugins: [
     new webpack.DefinePlugin({
-      ngDevMode: "undefined",
+      ngDevMode: 'undefined'
     }),
     ...plugins
   ],
   output: {
     uniqueName: 'onecx-ai-ui',
-    publicPath: 'auto',
+    publicPath: 'auto'
   },
   experiments: {
     ...config.experiments,
-    topLevelAwait: true,
+    topLevelAwait: true
   },
   optimization: {
     runtimeChunk: false,
-    splitChunks: false,
-  },
-};
+    splitChunks: false
+  }
+}

@@ -1,40 +1,40 @@
 const bypassFn = function (req, res) {
   try {
     if (req.method === 'OPTIONS') {
-      res.setHeader('Allow', 'GET, POST, HEAD, PUT, DELETE, OPTIONS');
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.setHeader('Access-Control-Allow-Methods', '*');
-      res.setHeader('Access-Control-Allow-Headers', '*');
-      return res.send('');
+      res.setHeader('Allow', 'GET, POST, HEAD, PUT, DELETE, OPTIONS')
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Access-Control-Allow-Methods', '*')
+      res.setHeader('Access-Control-Allow-Headers', '*')
+      return res.send('')
     } else {
-      return null;
+      return null
     }
   } catch (error) {
-    console.log('error', error);
+    console.log('error', error)
   }
-};
+}
 
 const PROXY_CONFIG = {
   '/bff': {
     target: 'http://onecx-ai-ui-bff',
     secure: false,
     pathRewrite: {
-      '^.*/bff': '',
+      '^.*/bff': ''
     },
     changeOrigin: true,
     logLevel: 'debug',
-    bypass: bypassFn,
+    bypass: bypassFn
   },
   '/mfe/onecx-ai-ui': {
     target: 'http://localhost:4200/',
     secure: false,
     pathRewrite: {
-      '^.*/mfe/onecx-ai-ui': '',
+      '^.*/mfe/onecx-ai-ui': ''
     },
     changeOrigin: true,
     logLevel: 'debug',
-    bypass: bypassFn,
+    bypass: bypassFn
   }
-};
+}
 
-module.exports = PROXY_CONFIG;
+module.exports = PROXY_CONFIG
