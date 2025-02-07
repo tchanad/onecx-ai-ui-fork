@@ -1,3 +1,5 @@
 export * from './aIKnowledgeDocumentBffService.service';
 import { AIKnowledgeDocumentBffService } from './aIKnowledgeDocumentBffService.service';
-export const APIS = [AIKnowledgeDocumentBffService];
+export * from './aIKnowledgeVectorDbBffService.service';
+import { AIKnowledgeVectorDbBffService } from './aIKnowledgeVectorDbBffService.service';
+export const APIS = [AIKnowledgeDocumentBffService, AIKnowledgeVectorDbBffService];
