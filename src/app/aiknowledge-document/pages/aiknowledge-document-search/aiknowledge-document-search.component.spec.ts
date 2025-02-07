@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
@@ -6,7 +7,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations'
 import { ActivatedRoute } from '@angular/router'
 import { LetDirective } from '@ngrx/component'
 import { ofType } from '@ngrx/effects'
-import { Action, Store, StoreModule } from '@ngrx/store'
+import { Store, StoreModule } from '@ngrx/store'
 import { MockStore, provideMockStore } from '@ngrx/store/testing'
 import { TranslateService } from '@ngx-translate/core'
 import { BreadcrumbService, ColumnType, PortalCoreModule, UserService } from '@onecx/portal-integration-angular'
@@ -20,7 +21,6 @@ import { AIKnowledgeDocumentSearchHarness } from './aiknowledge-document-search.
 import { initialState } from './aiknowledge-document-search.reducers'
 import { selectAIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.selectors'
 import { AIKnowledgeDocumentSearchViewModel } from './aiknowledge-document-search.viewmodel'
-
 
 describe('AIKnowledgeDocumentSearchComponent', () => {
   const origAddEventListener = window.addEventListener
@@ -36,11 +36,12 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
   }
 
   window.postMessage = (m: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     listeners.forEach((l) =>
       l({
         data: m,
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         stopImmediatePropagation: () => { },
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         stopPropagation: () => { }
       })
     )
@@ -99,8 +100,10 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
         LetDirective,
         ReactiveFormsModule,
         StoreModule.forRoot({}),
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         TranslateTestingModule.withTranslations('en', require('./../../../../assets/i18n/en.json')).withTranslations(
           'de',
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           require('./../../../../assets/i18n/de.json')
         ),
         HttpClientTestingModule,
@@ -124,7 +127,6 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     translateService.use('en')
     formBuilder = TestBed.inject(FormBuilder)
 
-
     store = TestBed.inject(MockStore)
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, baseAIKnowledgeDocumentSearchViewModel)
     store.refreshState()
@@ -143,7 +145,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
   })
 
   it('should dispatch resetButtonClicked action on resetSearch', async () => {
-    var doneFn = jest.fn()
+    const doneFn = jest.fn()
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {
       ...baseAIKnowledgeDocumentSearchViewModel,
       results: [
@@ -557,5 +559,4 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
     expect(diagram).toBeTruthy()
   })
-
-});
+})

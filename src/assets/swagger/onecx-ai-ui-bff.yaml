@@ -3,6 +3,152 @@ info:
   title: onecx-ai-ui-bff
   version: '1.0'
 paths:
+  /AIKnowledgeVectorDb/search:
+    post:
+      operationId: searchAIKnowledgeVectorDbs
+      tags:
+        - AIKnowledgeVectorDbBffService
+      description: This operation performs a search based on provided search criteria.
+        Search for AIKnowledgeVectorDb results.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchAIKnowledgeVectorDbRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchAIKnowledgeVectorDbResponse'
+        '400':
+          description: Bad request
+        '500':
+          description: Something went wrong
+  /AIKnowledgeVectorDb/{id}:
+    get:
+      x-onecx:
+        permissions:
+          AIKnowledgeVectorDb:
+            - read
+      operationId: getAIKnowledgeVectorDbById
+      tags:
+        - AIKnowledgeVectorDbBffService
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAIKnowledgeVectorDbByIdResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+    put:
+      x-onecx:
+        permissions:
+          AIKnowledgeVectorDb:
+            - write
+      operationId: updateAIKnowledgeVectorDb
+      tags:
+        - AIKnowledgeVectorDbBffService
+      description: This operation performs an update.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAIKnowledgeVectorDb'
+      responses:
+        '204':
+          description: AIKnowledgeVectorDb updated
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeVectorDbUpdateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
+        '404':
+          description: AIKnowledgeVectorDb not found
+    delete:
+      tags:
+        - AIKnowledgeVectorDbBffService
+      operationId: deleteAIKnowledgeVectorDb
+      description: Delete AIKnowledgeVectorDb by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: AIKnowledgeVectorDb deleted
+  /AIKnowledgeVectorDb:
+    post:
+      operationId: createAIKnowledgeVectorDb
+      tags:
+        - AIKnowledgeVectorDbBffService
+      description: This operation performs a create.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAIKnowledgeVectorDb'
+      responses:
+        '201':
+          description: New AIKnowledgeVectorDb created
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                format: url
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AIKnowledgeVectorDbCreateResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetailResponse'
   /aIKnowledgeDocument/search:
     post:
       operationId: searchAIKnowledgeDocuments
@@ -144,9 +290,148 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProblemDetailResponse'
+                $ref: '#/components/schemas/ProblemDetailResponse'                
 components:
   schemas:
+    AIKnowledgeVectorDb:
+      type: object
+      required:
+        - id
+      properties:
+        modificationCount:
+          type: integer
+          format: int32
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        vdb:
+          type: string
+        vdbCollection:
+          type: string
+        aiContext:
+          type: object
+          $ref: AIContext
+    SearchAIKnowledgeVectorDbRequest:
+      type: object
+      properties:
+        limit:
+          type: integer
+          maximum: 2500
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        description:
+          type: string
+        vdb:
+          type: string
+        vdbCollection:
+          type: string
+    SearchAIKnowledgeVectorDbResponse:
+      type: object
+      required:
+        - results
+        - totalNumberOfResults
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/AIKnowledgeVectorDb'
+        totalNumberOfResults:
+          type: integer
+          format: int32
+          description: Total number of results on the server.
+    ProblemDetailResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        detail:
+          type: string
+        params:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProblemDetailParam'
+        invalidParams:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProblemDetailInvalidParam'
+    ProblemDetailParam:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    ProblemDetailInvalidParam:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+    GetAIKnowledgeVectorDbByIdResponse:
+      type: object
+      required:
+        - result
+      properties:
+        result:
+          $ref: '#/components/schemas/AIKnowledgeVectorDb'
+    CreateAIKnowledgeVectorDb:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        appId:
+          type: string
+    UpdateAIKnowledgeVectorDb:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        appId:
+          type: string
+    AIKnowledgeVectorDbCreateResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        vdb:
+          type: string
+        vdbCollection:
+          type: string
+        aiContext:
+          type: object
+          $ref: AIContext
+    AIKnowledgeVectorDbUpdateResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        vdb:
+          type: string
+        vdbCollection:
+          type: string
+        aiContext:
+          type: object
+          $ref: AIContext
+    AIContext:
+      type: object
+      properties:
+        appId:
+          type: string
     AIKnowledgeDocument:
       type: object
       required:
@@ -198,36 +483,7 @@ components:
         totalNumberOfResults:
           type: integer
           format: int32
-          description: Total number of results on the server.
-    ProblemDetailResponse:
-      type: object
-      properties:
-        errorCode:
-          type: string
-        detail:
-          type: string
-        params:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProblemDetailParam'
-        invalidParams:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProblemDetailInvalidParam'
-    ProblemDetailParam:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-    ProblemDetailInvalidParam:
-      type: object
-      properties:
-        name:
-          type: string
-        message:
-          type: string
+          description: Total number of results on the server.    
     GetAIKnowledgeDocumentByIdResponse:
       type: object
       required:
@@ -286,4 +542,4 @@ components:
           enum:
             - NEW
             - PROCESSING
-            - EMBEDDED
+            - EMBEDDED          

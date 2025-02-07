@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -38,7 +38,9 @@ describe('AIKnowledgeDocumentCreateUpdateComponent', () => {
         LetDirective,
         TranslateTestingModule.withTranslations(
           'en',
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           require('./../../../../../../assets/i18n/en.json')
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
         ).withTranslations('de', require('./../../../../../../assets/i18n/de.json')),
         HttpClientTestingModule
       ],

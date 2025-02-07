@@ -61,7 +61,7 @@ export class AIKnowledgeDocumentSearchComponent implements OnInit {
       return actions
     })
   )
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
   diagramColumnId = 'status'
   diagramColumn$ = this.viewModel$.pipe(
     map((vm) => vm.columns.find((e) => e.id === this.diagramColumnId) as DataTableColumn)

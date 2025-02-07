@@ -24,9 +24,9 @@ export class AIKnowledgeDocumentCreateUpdateComponent
 
   public formGroup: FormGroup
 
-  primaryButtonEnabled: EventEmitter<boolean> = new EventEmitter()
+  primaryButtonEnabled = new EventEmitter<boolean>()
   dialogResult: AIKnowledgeDocument | undefined = undefined
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
 
   constructor() {
     this.formGroup = new FormGroup({

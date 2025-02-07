@@ -30,6 +30,15 @@ app:
             EXPORT: Export AIKnowledgeDocument
             VIEW: View mode for AIKnowledgeDocument
             SEARCH: Search AIKnowledgeDocument
+          AI_KNOWLEDGE_VECTOR_DB:
+            CREATE: Create AIKnowledgeVectorDb
+            EDIT: Edit AIKnowledgeVectorDb
+            DELETE: Delete AIKnowledgeVectorDb
+            SAVE: Update and save AIKnowledgeVectorDb
+            IMPORT: Import AIKnowledgeVectorDb
+            EXPORT: Export AIKnowledgeVectorDb
+            VIEW: View mode for AIKnowledgeVectorDb
+            SEARCH: Search AIKnowledgeVectorDb
     keycloak:
       client:
         enabled: true

@@ -8,6 +8,11 @@ export const routes: Routes = [
     matcher: startsWith('aiknowledge-document'),
     loadChildren: () =>
       import('./aiknowledge-document/aiknowledge-document.module').then((mod) => mod.AIKnowledgeDocumentModule)
+  },
+  {
+    matcher: startsWith('ai-knowledge-vector-db'),
+    loadChildren: () =>
+      import('./ai-knowledge-vector-db/ai-knowledge-vector-db.module').then((mod) => mod.AIKnowledgeVectorDbModule)
   }
 ]
 
@@ -15,4 +20,4 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(addInitializeModuleGuard(routes)), TranslateModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

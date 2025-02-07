@@ -79,7 +79,7 @@ export class AIKnowledgeDocumentSearchEffects {
         ofType(AIKnowledgeDocumentSearchActions.detailsButtonClicked),
         concatLatestFrom(() => this.store.select(selectUrl)),
         tap(([action, currentUrl]) => {
-          let urlTree = this.router.parseUrl(currentUrl)
+          const urlTree = this.router.parseUrl(currentUrl)
           urlTree.queryParams = {}
           urlTree.fragment = null
           this.router.navigate([urlTree.toString(), 'details', action.id])
@@ -224,12 +224,12 @@ export class AIKnowledgeDocumentSearchEffects {
       ofType(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentButtonClicked),
       concatLatestFrom(() => this.store.select(AIKnowledgeDocumentSearchSelectors.selectResults)),
       map(([action, results]) => {
-        console.log('Action:', action);
-        console.log('Results:', results);
+        console.log('Action:', action)
+        console.log('Results:', results)
         return results.find((item) => item.id == action.id)
       }),
       mergeMap((itemToDelete) => {
-        console.log('Item to delete:', itemToDelete);
+        console.log('Item to delete:', itemToDelete)
         return this.portalDialogService
           .openDialog<unknown>(
             'AI_KNOWLEDGE_DOCUMENT_DELETE.HEADER',
@@ -245,18 +245,18 @@ export class AIKnowledgeDocumentSearchEffects {
           )
           .pipe(
             map((state): [DialogState<unknown>, AIKnowledgeDocument | undefined] => {
-              console.log('Dialog STATE:', state);
-              console.log('Item to delete after dialog:', itemToDelete);
+              console.log('Dialog STATE:', state)
+              console.log('Item to delete after dialog:', itemToDelete)
               return [state, itemToDelete]
             })
           )
       }),
       switchMap(([dialogResult, itemToDelete]) => {
-        console.log('Dialog result:', dialogResult);
-        console.log('Item to delete after dialog:', itemToDelete);
+        console.log('Dialog result:', dialogResult)
+        console.log('Item to delete after dialog:', itemToDelete)
         if (!dialogResult || dialogResult.button == 'secondary') {
-          console.log('Dialog result:', dialogResult);
-          console.log('Item to delete after dialog:', itemToDelete);
+          console.log('Dialog result:', dialogResult)
+          console.log('Item to delete after dialog:', itemToDelete)
           return of(AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentCancelled())
         }
         if (!itemToDelete) {
@@ -265,15 +265,15 @@ export class AIKnowledgeDocumentSearchEffects {
 
         return this.aIKnowledgeDocumentService.deleteAIKnowledgeDocument(itemToDelete.id).pipe(
           map(() => {
-            console.log('Dialog result SUCCESS:', dialogResult);
-            console.log('Item to delete after dialog:', itemToDelete);
+            console.log('Dialog result SUCCESS:', dialogResult)
+            console.log('Item to delete after dialog:', itemToDelete)
             this.messageService.success({
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.SUCCESS'
             })
             return AIKnowledgeDocumentSearchActions.deleteAIKnowledgeDocumentSucceeded()
           }),
           catchError((error) => {
-            console.log('Error:', error);
+            console.log('Error:', error)
             this.messageService.error({
               summaryKey: 'AI_KNOWLEDGE_DOCUMENT_DELETE.ERROR'
             })
@@ -298,7 +298,7 @@ export class AIKnowledgeDocumentSearchEffects {
     )
   })
 
-  performSearch(searchCriteria: Record<string, any>) {
+  performSearch(searchCriteria: Record<string, unknown>) {
     return this.aIKnowledgeDocumentService
       .searchAIKnowledgeDocuments({
         ...Object.entries(searchCriteria).reduce(
