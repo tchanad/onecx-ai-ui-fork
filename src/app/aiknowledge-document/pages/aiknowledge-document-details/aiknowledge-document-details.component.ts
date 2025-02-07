@@ -3,12 +3,10 @@ import { Store } from '@ngrx/store'
 import { Action, BreadcrumbService, ObjectDetailItem } from '@onecx/portal-integration-angular'
 import { map, Observable } from 'rxjs'
 
-import { PrimeIcons } from 'primeng/api'
+import { ActivatedRoute } from '@angular/router'
+import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 import { selectAIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.selectors'
 import { AIKnowledgeDocumentDetailsViewModel } from './aiknowledge-document-details.viewmodel'
-import { ActivatedRoute } from '@angular/router'
-import { AIKnowledgeDocumentDetailsActions } from './aiknowledge-document-details.actions'
-import { AIKnowledgeDocumentStatusEnum } from 'src/app/shared/generated'
 
 @Component({
   selector: 'app-aiknowledge-document-details',
@@ -25,15 +23,15 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
       const labels: ObjectDetailItem[] = [
         {
           label: 'Name',
-          value: vm.details?.name || '',
+          value: vm.details?.name || ''
         },
         {
           label: 'DocumentRefId',
-          value: vm.details?.documentRefId || '',
+          value: vm.details?.documentRefId || ''
         },
         {
           label: 'Status',
-          value: vm.details?.status || '',
+          value: vm.details?.status || ''
         }
       ]
       return labels
@@ -41,7 +39,7 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
   )
 
   headerActions$: Observable<Action[]> = this.viewModel$.pipe(
-    map((vm) => {
+    map(() => {
       const actions: Action[] = [
         {
           titleKey: 'AI_KNOWLEDGE_DOCUMENT_DETAILS.GENERAL.BACK',
@@ -62,7 +60,7 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
     private store: Store,
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.breadcrumbService.setItems([

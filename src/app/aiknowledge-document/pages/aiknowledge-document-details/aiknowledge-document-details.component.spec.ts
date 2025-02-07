@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
@@ -30,12 +31,13 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
   }
 
   window.postMessage = (m: any) => {
-     
     listeners.forEach((l) =>
       l({
         data: m,
-        stopImmediatePropagation: () => { },
-        stopPropagation: () => { }
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        stopImmediatePropagation: () => {},
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        stopPropagation: () => {}
       })
     )
   }
@@ -66,8 +68,10 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
       imports: [
         PortalCoreModule,
         LetDirective,
+        // eslint-disable-next-line @typescript-eslint/no-require-imports
         TranslateTestingModule.withTranslations('en', require('./../../../../assets/i18n/en.json')).withTranslations(
           'de',
+          // eslint-disable-next-line @typescript-eslint/no-require-imports
           require('./../../../../assets/i18n/de.json')
         ),
         HttpClientTestingModule

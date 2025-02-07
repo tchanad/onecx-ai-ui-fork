@@ -298,7 +298,7 @@ export class AIKnowledgeDocumentSearchEffects {
     )
   })
 
-  performSearch(searchCriteria: Record<string, any>) {
+  performSearch(searchCriteria: Record<string, unknown>) {
     return this.aIKnowledgeDocumentService
       .searchAIKnowledgeDocuments({
         ...Object.entries(searchCriteria).reduce(
