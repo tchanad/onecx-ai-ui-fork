@@ -56,7 +56,7 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
     })
   )
 
-  statusValues = Object.values(AIKnowledgeDocumentStatusEnum);
+  statusValues = Object.values(AIKnowledgeDocumentStatusEnum)
 
   constructor(
     private store: Store,
@@ -71,6 +71,6 @@ export class AIKnowledgeDocumentDetailsComponent implements OnInit {
         labelKey: 'AI_KNOWLEDGE_DOCUMENT_DETAILS.BREADCRUMB',
         routerLink: '/aiknowledge-document'
       }
-    ]);
+    ])
   }
 }

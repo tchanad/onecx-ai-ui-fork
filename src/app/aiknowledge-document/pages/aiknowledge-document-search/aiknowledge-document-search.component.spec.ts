@@ -36,7 +36,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
   }
 
   window.postMessage = (m: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+     
     listeners.forEach((l) =>
       l({
         data: m,
@@ -143,7 +143,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
   })
 
   it('should dispatch resetButtonClicked action on resetSearch', async () => {
-    var doneFn = jest.fn()
+    const doneFn = jest.fn()
     store.overrideSelector(selectAIKnowledgeDocumentSearchViewModel, {
       ...baseAIKnowledgeDocumentSearchViewModel,
       results: [
@@ -558,4 +558,4 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     expect(diagram).toBeTruthy()
   })
 
-});
+})
