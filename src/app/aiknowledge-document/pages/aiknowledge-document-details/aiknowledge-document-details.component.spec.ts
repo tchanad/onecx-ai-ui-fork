@@ -31,6 +31,7 @@ describe('AIKnowledgeDocumentDetailsComponent', () => {
   }
 
   window.postMessage = (m: any) => {
+
     listeners.forEach((l) =>
       l({
         data: m,

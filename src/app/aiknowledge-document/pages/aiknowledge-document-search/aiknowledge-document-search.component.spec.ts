@@ -36,6 +36,7 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
   }
 
   window.postMessage = (m: any) => {
+
     listeners.forEach((l) =>
       l({
         data: m,
@@ -559,4 +560,5 @@ describe('AIKnowledgeDocumentSearchComponent', () => {
     diagram = await aIKnowledgeDocumentSearch.getDiagram()
     expect(diagram).toBeTruthy()
   })
+
 })
